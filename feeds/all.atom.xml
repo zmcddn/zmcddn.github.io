@@ -101,6 +101,7 @@ Run with Py27:&lt;br&gt;
 &lt;li&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; the anaconda path for Mac is usually &lt;code&gt;/Users/\*user_name/anaconda3/envs/\*environemnt_name/bin/python&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;&lt;a name="summary"&gt;&lt;/a&gt;Summary of useful conda commands&lt;/h2&gt;
+&lt;hr&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
