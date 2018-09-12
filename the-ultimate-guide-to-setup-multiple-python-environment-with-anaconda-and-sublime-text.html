@@ -89,7 +89,7 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <h2><a name="step2"></a>Step 2: setup python environment with Anaconda on Win 10</h2>
 <ol>
 <li>Open <strong>Anaconda Prompt</strong> to create new environment. Note that it is the Anaconda Prompt not the windows command line. <br>
-<img height="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_1.png"/></li>
+<img height="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_1.png"/></li>
 <li>When the Anaconda Prompt opens, it is in the default directory with many packages pre-installed. Now you can install the missing packages that you need using <strong> <code>conda install \*package_name</code> </strong>. <ul>
 <li>For instance, you can install multiple packages at the same time using <code>conda install Django flask tornado twisted</code></li>
 </ul>
@@ -97,30 +97,30 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <li>If there are some packages that cannot be installed using <code>conda</code> command, you can use <code>pip</code> as described in the following steps.</li>
 <li>Once the packages are installed, you can create your own brand-new python 3.6 environment using <code>conda create -n py36 –clone base</code> as the following picture indicates.<ul>
 <li>Since it is a clone from the base, all the packages you installed can be used here. This will save a lot of time.   <br>
-<img width="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_2.png"/></li>
+<img width="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_2.png"/></li>
 <li><strong>NOTE</strong> that you can also create the environment using <code>conda create -n \*environment_name</code> first and then install all the necessary packages</li>
 </ul>
 </li>
 <li>Use <code>activate py36</code> to get into the environment you just created, and use pip to install the packages that cannot be installed with "conda". <ul>
 <li>For example, wxpython can be install using pip command as follows (i.e. <code>pip install -U wxpython</code>):
-<img width="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_3.png"/></li>
+<img width="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_3.png"/></li>
 </ul>
 </li>
 <li>You can use <code>python</code> command to check the version of python and <code>quit()</code> command to quit the python environment as follows:  <br>
-<img width="600" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_4.png"/></li>
+<img width="600" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_4.png"/></li>
 <li>Use <code>deactivate</code> to quit current environment</li>
 <li>Now the python 3.6 environment is fully prepared, we can add the python 2.7 environment using <code>conda create -n py27 python=2.7</code></li>
 <li>Once the 2.7 environment is created, again you can use <code>activate py27</code> to get into the environment and use <code>conda install \*package_name</code> or <code>pip</code> to install packages as instructed above.</li>
 <li>When inside your base/root directory, you can use <code>conda info --envs</code> to check the current environments installed on your computer as follows:<br>
-<img alt="Alt text" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_5.png">  </li>
+<img alt="Alt text" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_5.png">  </li>
 </ol>
 <h2><a name="step3"></a>Step 3: setup Sublime Text build file on Win 10</h2>
 <ol>
 <li>Navigate to the "New Build System"   <br>
-<img width="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_6.png"/></li>
+<img width="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_6.png"/></li>
 <li>Type the following JSON format code as follows. The path on the 4th line is the path to the python environment we created above.  <br>
-<img alt="Alt text" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_7.png">
-<!-- <img width="600" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_7.png"/> --></li>
+<img alt="Alt text" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_7.png">
+<!-- <img width="600" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_7.png"/> --></li>
 <li>Save the file with an extension <code>.sublime-build</code> into the default folder </li>
 <li>Repeat steps 1 to 3 to setup for the other python environment.</li>
 <li>Now you can see the files you just saved have appeared in the "Build System". <ul>
@@ -129,21 +129,21 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 </li>
 <li>Now you can check the versions of python by run different build using the following codes.<br>
 Run with Py36:<br>
-<img width="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_8.png"/><br>
+<img width="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_8.png"/><br>
 Run with Py27:<br>
-<img width="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_9.png"/></li>
+<img width="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_9.png"/></li>
 <li><strong>NOTE:</strong> the anaconda path for Win 10 is usually <code>D:/Anaconda3/envs/\*environemnt_name/python</code></li>
 </ol>
 <h2><a name="step4"></a>Step 4: setup python environment with Anaconda on Mac</h2>
 <ol>
 <li>Setting up python with Anaconda on Mac is pretty much the same as on Win 10, except that when you activate the environment, you have to use command "source activate" rather than "activate".  <br>
-<img alt="Alt text" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_11.png"></li>
+<img alt="Alt text" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_11.png"></li>
 <li>For package installation, it is identical to the steps for Win 10 described above. You can simply follow the steps in <a href="#step2">Step 2</a></li>
 </ol>
 <h2><a name="step5"></a>Step 5: setup Sublime Text build file on Mac</h2>
 <ol>
 <li>Navigate to the "New Build System"  <br>
-<img alt="Alt text" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_10.png"></li>
+<img alt="Alt text" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_10.png"></li>
 <li>Find the Anaconda path of python environment. The following steps explains how to do it:<ol>
 <li>Open a terminal, and activate the environment you would like to set up.<ul>
 <li>For example, <code>source activate py27</code></li>
@@ -151,15 +151,15 @@ Run with Py27:<br>
 </li>
 <li>Use command <code>which python</code> to find out the path</li>
 <li>Don't close the terminal and remember the path. The above two steps canbe seen as follows:  <br>
-<img alt="Alt text" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_12.png"></li>
+<img alt="Alt text" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_12.png"></li>
 </ol>
 </li>
 <li>Use the path find above and type the following code as follows:  <br>
-<img width="500" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_13.PNG"/></li>
+<img width="500" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_13.PNG"/></li>
 <li>Save it to the default location with the <code>.sublime-build</code> extension. </li>
 <li>You can repeat steps 1 to 4 for other environment you have created.</li>
 <li>To double check, run the following command and see the results:  <br>
-<img alt="Alt text" src="https://github.com/zmcddn/zmcddn.github.io/blob/master/tutorials/20180211/20180211_14.png"></li>
+<img alt="Alt text" src="https://github.com/zmcddn/Blog_Images/blob/master/tutorials/20180211/20180211_14.png"></li>
 <li><strong>NOTE:</strong> the anaconda path for Mac is usually <code>/Users/\*user_name/anaconda3/envs/\*environemnt_name/bin/python</code></li>
 </ol>
 <h2><a name="summary"></a>Summary of useful conda commands</h2>
