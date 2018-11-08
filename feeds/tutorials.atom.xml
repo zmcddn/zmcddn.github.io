@@ -107,6 +107,8 @@
 &lt;li&gt;put the following lines below the comments:&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;export DJANGO_SETTINGS_MODULE='project_name.settings.dev'&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;export PYTHONPATH=$PYTHONPATH:'path_generated_by_pwd'&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;The first line allows you to use customized settings&lt;/li&gt;
+&lt;li&gt;The second line allows you to &lt;code&gt;django-admin&lt;/code&gt; commands&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;close and save the file: &lt;code&gt;ctrl + x&lt;/code&gt;, type &lt;code&gt;y&lt;/code&gt; and press &lt;code&gt;enter&lt;/code&gt;&lt;/li&gt;
@@ -123,8 +125,8 @@
 &lt;/ul&gt;
 &lt;h4&gt;10. start django project&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;with the dev-tools installed: &lt;code&gt;django-admin runserver&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;without the dev-tools installed: &lt;code&gt;python manage.py runserver&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;if you have done step 9: &lt;code&gt;django-admin runserver&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;if you haven't done step 9: &lt;code&gt;python manage.py runserver&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;11. check the website in browser&lt;/h4&gt;
 &lt;ul&gt;
