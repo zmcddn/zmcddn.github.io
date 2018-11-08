@@ -59,8 +59,8 @@
 
     <div class='article'>
         <div class="content-title">
-            <a href="/setup-virtualenv-for-any-project.html"><h1>Setup Virtualenv for Any Project</h1></a>
-Wed 04 July 2018
+            <a href="/pipenv-tutorial-the-official-package-control-for-pyton.html"><h1>Pipenv Tutorial - the official package control for pyton</h1></a>
+Wed 10 October 2018
 
 by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
  
@@ -69,150 +69,216 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
  
         </div>
         
-        <div><ul>
-<li>Virtualenv is a very handy tool for creating seperate virtual environments for python projects.</li>
-<li>It is essential and probably mandatory in many cases to use Virtualenv or Virtualenv-like tools (i.e. Anaconda, Pipenv) to run a python project.</li>
-<li>In this tutorial, I'll show you how to create a virtualenv for a python project step-by-step. </li>
-</ul>
-<p><strong>NOTE:</strong> the commends in this tutorial is for Linux/Mac OS, Windows will be slightly differnet when setting up environment variables and system path</p>
-<h2>Setup virtualenv</h2>
-<h4>1. Install pip</h4>
+        <div><h4>Benefits:</h4>
 <ul>
-<li><code>sudo apt-get install python-pip</code></li>
+<li>Pipenv is essentially a combination of pip and virtualenv (i.e. makes virtual environment), but with better version control</li>
+<li>It solves the version conflict for packages and sub-dependencies</li>
+<li>It could automatically install the latest package/dependency that meet all the requirements</li>
+<li>It is the new <strong>STANDARD</strong> for python packages and is <strong>OFFICIALLY</strong> used</li>
 </ul>
-<h4>2. Install virtualenv</h4>
+<h2>How to use it</h2>
 <ul>
-<li><code>sudo pip install virtualenv</code></li>
-</ul>
-<h4>3. Create a folder to install virtualenv</h4>
+<li>
+<p>Installation: <code>pip install pipenv</code></p>
 <ul>
-<li>Normally this folder would be created inside the project folder<ul>
-<li>For example, inside the <strong>Projects</strong> folder</li>
+<li>After it is installed, use <code>pipenv</code> instead of <code>pip</code> in the future for any package install</li>
 </ul>
 </li>
-<li>It should be named as <strong>Envs</strong></li>
-</ul>
-<h4>4. Install virtualenvwrapper</h4>
+<li>
+<p>Create/Enter virtual enviornment: <code>pipenv shell</code></p>
 <ul>
-<li><code>sudo pip install virtualenvwrapper</code></li>
-<li>This is a very useful tool/package to save you from the hassles of virtualenv</li>
-</ul>
-<h4>5. Set WORKON_HOME to your virtualenv</h4>
-<ul>
-<li><code>export WORKON_HOME=~/Desktop/Projects/Env</code></li>
-<li>If the virtualenv folder is located at the root directary, use:<ul>
-<li><code>export WORKON_HOME=~/.Env</code></li>
+<li>This will create a virtual environment if one doesn’t already exist in a default location.</li>
+<li>Here is <a href="https://pipenv.readthedocs.io/en/latest/advanced/#configuration-with-environment-variables">a list of environment variable</a> to setup in order to change the default behavior</li>
+<li>You can force the creation of a Python 2 or 3 environment with the arguments <code>--two</code> and <code>--three</code> respectively.<ul>
+<li>More specific version can be specified as <code>-python 3.6</code></li>
 </ul>
 </li>
-</ul>
-<h4>6. Add <code>virtualenvwrapper.sh</code> to <code>.bashrc</code></h4>
-<ul>
-<li>Nevigate to the folder where the virtualenv is installed (normally under /usr/local/bin)</li>
-<li><code>nano ~/.bashrc</code></li>
-<li>Add the following line to the folder:<ul>
-<li><code>. /usr/local/bin/virtualenvwrapper.sh</code></li>
+<li>Quit virtual environment: <code>ctrl + D</code></li>
 </ul>
 </li>
-<li>If the virtualenvwrapper is installed in another directory, add the path of the directory instead of the <code>/usr/local/bin/</code><ul>
-<li>For example, <code>. /Users/Carson/anaconda3/bin/virtualenvwrapper.sh</code></li>
-</ul>
-</li>
-<li><code>CTRL + X</code> to exit, and <code>Y</code> to save, and hit <code>Enter</code></li>
-<li>After its being added, use <code>source ~/.bashrc</code> to check if it is working. It should print some files on the screen with no errors</li>
-</ul>
-<hr>
-<h2>Setup virtual environment</h2>
-<h4>1. make virtual environment</h4>
+<li>
+<p>Install package: same as using <code>pip</code>, but use <code>pipenv</code> instead</p>
 <ul>
-<li><code>mkvirtualenv env_name --python=python3</code></li>
-<li>check python version: <code>python -V</code></li>
-</ul>
-<h4>2. activate environment</h4>
-<ul>
-<li>the environment is activated by default when created</li>
-<li>to activate an environment: <code>workon env_name</code></li>
-</ul>
-<h4>3. get the project</h4>
-<ul>
-<li>nevigate to the directory that you would like to download the project</li>
-<li>get the project: <code>git clone</code> </li>
-<li>From the directory you could tell which python version the project is under</li>
-</ul>
-<h4>4. get all the nesscary packages</h4>
-<ul>
-<li>enter the project directory and nevigate to where the requirement file is located</li>
-<li><code>pip install -r requirements.txt</code></li>
-</ul>
-<h4>5. adding apps for the defaul path in virtualenv</h4>
-<ul>
-<li>sometimes when installing the packages errors may occor, since the apps are put inside the <strong>apps folder</strong> which is not recognized by virtualenv</li>
-<li>add the <strong>apps folder</strong>: <code>add2virtualenv apps</code></li>
-</ul>
-<h4>6. setup default startup folder for the environment</h4>
-<ul>
-<li>nevigate to the folder where you work all the time</li>
-<li>setup the folder as default: <code>setvirtualenvproject</code></li>
-<li>once the defaul folder is setup, use <code>cdproject</code> to go back from anywhere</li>
-</ul>
-<h4>7. install dev tools:</h4>
-<ul>
-<li>If the project has a different requirements file for the devs, nevigate tothat folder</li>
-<li><code>pip install -r /requirements/dev.txt</code></li>
-</ul>
-<h4>8. remove environment</h4>
-<ul>
-<li><code>rmvirtualenv env_name</code></li>
-</ul>
-<h4>9. tell django which setting files to run in environment:</h4>
-<ul>
-<li>the goal of this step is for the django to use the customized settings in the <code>/project_name/settings/dev.py</code></li>
-<li>go to the folder where the <code>manage.py</code> locates</li>
-<li>copy the path generated: <code>pwd</code></li>
-<li>go to the virtual environment: <code>cdvirtualenv</code></li>
-<li><code>cd bin</code></li>
-<li>to enter and edit the file: <code>nano postactivate</code><ul>
-<li>put the following lines below the comments:<ul>
-<li><code>export DJANGO_SETTINGS_MODULE='project_name.settings.dev'</code></li>
-<li><code>export PYTHONPATH=$PYTHONPATH:'path_generated_by_pwd'</code></li>
-<li>The first line allows you to use customized settings</li>
-<li>The second line allows you to <code>django-admin</code> commands</li>
-</ul>
-</li>
-<li>close and save the file: <code>ctrl + x</code>, type <code>y</code> and press <code>enter</code></li>
-</ul>
-</li>
-<li>to enter and edit the file: <code>nano postdeactivate</code><ul>
-<li>put the following lines below the comments:<ul>
-<li><code>unset DJANGO_SETTINGS_MODULE</code></li>
+<li>After the installation, two files are generated: <code>Pipfile</code> and <code>Pipfile.lock</code>, which are used for package version control</li>
+<li>If the package cannot be installed due to package confliction, use the <code>--skip-lock</code> argument to skip the package version lock.<ul>
+<li>For example, <code>pipenv install django --skip-lock</code></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>deactivate and activate</strong> the environment for the settings to work</li>
-</ul>
-<h4>10. start django project</h4>
+<li>
+<p>Install from version control system (i.e. github): <code>pipenv install -e git+https://github.com/requests/requests.git#egg=requests</code></p>
+</li>
+<li>
+<p>Install package for different environment (i.e. dev environment): <code>pipenv install pytest --dev</code></p>
 <ul>
-<li>if you have done step 9: <code>django-admin runserver</code></li>
-<li>if you haven't done step 9: <code>python manage.py runserver</code></li>
+<li>Providing the <code>--dev</code> argument will put the dependency in a special <code>[dev-packages]</code> location in the <code>Pipfile</code>. These development packages only get installed if you specify the <code>--dev</code> argument with <code>pipenv install</code>.</li>
+<li>The different sections separate dependencies needed only for development from ones needed for the base code to actually work.</li>
 </ul>
-<h4>11. check the website in browser</h4>
+</li>
+<li>
+<p>Lock the environment for production: <code>pipenv lock</code></p>
 <ul>
-<li><code>localhost:8000</code></li>
+<li>This will create/update your Pipfile.lock, which you’ll <strong>never</strong> need to (and are never meant to) edit manually. You should always use the generated file.</li>
 </ul>
-<h4>12. Force refresh the browser</h4>
+</li>
+<li>
+<p>Install the environment in production: <code>pipenv install --ignore-pipfile</code></p>
 <ul>
-<li>Sometimes when working with multiple projects and switching back and forth, the page display in browser can be scattered since there is cache built-in the browser</li>
-<li>to force refresh the browser: <code>ctrl + shift + r</code></li>
+<li>This tells Pipenv to ignore the <code>Pipfile</code> for installation and use what’s in the <code>Pipfile.lock</code>. </li>
+<li>The lock file enables deterministic builds by taking a snapshot of all the versions of packages in an environment (similar to the result of a <code>pip freeze</code>).</li>
 </ul>
-<h4>13. Some useful virtualenv commands</h4>
+</li>
+<li>
+<p>Setup the development environment: <code>pipenv install --dev</code></p>
 <ul>
-<li><strong><code>lsvirtualenv</code></strong>: List all of the environments.</li>
-<li><strong><code>cdsitepackages</code></strong>: Navigate into the <code>site-package</code> directory of the currently activated virtual environment</li>
-<li><strong><code>lssitepackages</code></strong>: Shows contents of <code>site-package</code> directory.</li>
+<li>This installs all the dependencies needed for development, which includes both the regular dependencies and those you specified with the <code>--dev</code> argument during install.</li>
+<li>When an exact version isn’t specified in the Pipfile, the install command gives the opportunity for dependencies (and sub-dependencies) to update their versions.</li>
+</ul>
+</li>
+</ul>
+<h2>Pipenv’s Dependency Resolution Approach</h2>
+<ul>
+<li>Pipenv will attempt to install sub-dependencies that satisfy all the requirements from your core dependencies.</li>
+<li>If there are conflicting dependencies, pipenv will not be able to create a lock file and wil output an error</li>
+<li>Show dependency graph for top-level dependencies and their sub-dependencies: <code>pipenv graph</code></li>
+<li>Show dependency graph for the sub-dependencies with the parent: <code>pipenv graph --reverse</code></li>
+</ul>
+<h2>The Pipfile</h2>
+<ul>
+<li>
+<p><code>Pipfile</code> intends to replace <code>requirements.txt</code>. </p>
+</li>
+<li>
+<p><a href="https://packaging.python.org/tutorials/managing-dependencies/#managing-dependencies">Pipenv is the official package management tool recommended by Python itself.</a></p>
+</li>
+<li>
+<p>You shouldn’t have any sub-dependencies in your Pipfile.</p>
+<ul>
+<li>You should only include the packages you actually import and use. Pipenv will install the dependencies automatically.</li>
+</ul>
+</li>
+</ul>
+<h2>The Pipfile.lock</h2>
+<ul>
+<li>This file enables deterministic builds by specifying the exact requirements for reproducing an environment.</li>
+<li>It contains exact versions for packages and hashes to support more secure verification.</li>
+<li>Its in <code>JSON</code> format</li>
+<li>You should <strong>never</strong> change this file by hand.</li>
+</ul>
+<h2>Pipenv Extra Features</h2>
+<ul>
+<li>
+<p>Open a third-party package in your default editor: <code>pipenv open flask</code></p>
+<ul>
+<li>This will open the <code>flask</code> package in the default editor</li>
+<li>You can specify a program with an <code>EDITOR</code> environmental variable.<ul>
+<li>i.e. <code>EDITOR=subl</code> for sublime text</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Run a command in the virtual environment without launching a shell: <code>pipenv run &lt;insert command here&gt;</code></p>
+</li>
+<li>
+<p>Check for security vulnerabilities: <code>pipenv check</code></p>
+</li>
+<li>
+<p>Uninstall a package: <code>pipenv uninstall numpy</code></p>
+</li>
+<li>
+<p>Wipe all the installed packages from virtual environment: <code>pipenv uninstall --all</code></p>
+<ul>
+<li>You can replace <code>--all</code> with <code>--all-dev</code> to just remove dev packages.</li>
+</ul>
+</li>
+<li>
+<p>Pipenv supports the automatic loading of environmental variables when a <code>.env</code> file exists in the top-level directory. </p>
+<ul>
+<li>When you pipenv shell to open the virtual environment, it loads your environmental variables from the file. </li>
+</ul>
+</li>
+<li>
+<p>To find out where your virtual environment is: <code>pipenv --venv</code></p>
+</li>
+<li>
+<p>To find out where your project home is: <code>pipenv --where</code></p>
+</li>
+<li>
+<p>Generate requirements.txt file from Pipfile:</p>
+<ul>
+<li><code>pipenv lock -r &gt; requirements.txt</code></li>
+<li><code>pipenv lock -r -d &gt; dev-requirements.txt</code></li>
+</ul>
+</li>
+</ul>
+<h2>What if you alerady have a requirements.txt file</h2>
+<ul>
+<li>
+<p><code>pipenv install</code> should automatically detect the <code>requirements.txt</code> and convert it to a <code>Pipfile</code></p>
+<ul>
+<li>You should change Pipfile to only specify exact versions if <code>requirements.txt</code> file uses exact versions</li>
+</ul>
+</li>
+<li>
+<p>If things break because of a dependency:</p>
+<ul>
+<li>Update code to function with the new version of the dependency.<ul>
+<li>If backward compatibility with previous versions of the dependency isn’t possible, you have to bump the required version in Pipfile like <code>numpy = "&gt;=1.15"</code></li>
+</ul>
+</li>
+<li>Restrict the version of the dependency in the Pipfile to be &lt; the version that just broke your code: <code>numpy = "&gt;=1.14.1,&lt;1.15"</code></li>
+</ul>
+</li>
+<li>
+<p>You could just install from the requirement file as usual: <code>pipenv install -r requirements.txt</code></p>
+<ul>
+<li>If you have a dev version or something similar, you can add the <code>--dev</code> argument as follows: <code>pipenv install -r dev-requirements.txt --dev</code></li>
+</ul>
+</li>
+</ul>
+<h2>Work flow for any project</h2>
+<ol>
+<li>Get pipenv: <code>pip install pipenv</code></li>
+<li>Create a virtual environment: <code>pipenv shell</code></li>
+<li>Setup local development: <code>pipenv install --dev</code></li>
+<li>Work on the code, use version control such as <code>git</code></li>
+<li>After done development, lock the environment: <code>pipenv lock</code></li>
+<li>When finished working, quit environment: <code>ctrl + D</code></li>
+<li>Setup production: <code>pipenv install --ignore-pipfile</code></li>
+<li>Repeate steps 3-6 for development</li>
+</ol>
+<h2>Reference</h2>
+<ul>
+<li><a href="https://realpython.com/pipenv-guide/">Pipenv: A Guide to the New Python Packaging Tool</a></li>
+<li><a href="https://pipenv.readthedocs.io/en/latest/basics/">Basic Usage of Pipenv</a></li>
+<li><a href="https://feici02.github.io/2017/09/24/pipenv-cheatsheet.html">Pipenv Cheatsheet | feici02’s tidbits</a></li>
 </ul></div>
         <hr />
     </div>
 		
+
+ 
+        
+
+ 
+
+    <div class='article'>
+        <a href="/setup-virtualenv-for-any-project.html"><h2>Setup Virtualenv for Any Project</h2></a>
+        <div class= "well small"> Wed 04 July 2018
+
+by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
+ 
+
+
+ </div>
+        <div class="summary"><ul>
+<li>Virtualenv is a very handy tool for creating seperate virtual environments for python projects.</li>
+<li>It is essential and probably mandatory in many cases to use Virtualenv or Virtualenv-like tools (i.e. Anaconda, Pipenv) to run a python project.</li>
+<li>In this tutorial, I'll show you how to create a virtualenv for …</li></ul> <a class="btn btn-info xsmall" href="/setup-virtualenv-for-any-project.html">read more</a></div>
+    </div>	
+				
 
  
         
