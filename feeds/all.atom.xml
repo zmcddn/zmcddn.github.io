@@ -24,11 +24,13 @@
 &lt;h2&gt;Create blog&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Run &lt;code&gt;pelican-quickstart&lt;/code&gt; in the blog directory and follow the interactive setup sequence.&lt;/li&gt;
-&lt;li&gt;Feel free to hit the &lt;code&gt;Enter&lt;/code&gt; key to accept the default values except for the following lines:&lt;/li&gt;
+&lt;li&gt;Feel free to hit the &lt;code&gt;Enter&lt;/code&gt; key to accept the default values except for the following lines:&lt;ul&gt;
 &lt;li&gt;the title of the website&lt;/li&gt;
 &lt;li&gt;the author of the website&lt;/li&gt;
 &lt;li&gt;n for the URL prefix&lt;/li&gt;
 &lt;li&gt;timezone&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Install Jupyter plugin for Pelican&lt;/h2&gt;
 &lt;p&gt;There are a lot of plugins that are super handy for Pelican, and jupyter plugin is definitely one among them. Follow the steps below to install the plugin:&lt;/p&gt;
@@ -121,10 +123,12 @@
 &lt;h2&gt;A bit more in-depth about the overral setup&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;This tutorial provides a ste-by-step guide to setup a Github blog via Pelican&lt;/li&gt;
-&lt;li&gt;The package &lt;code&gt;ghp-import&lt;/code&gt; and command &lt;code&gt;ghp-import output -b master&lt;/code&gt; is used to push static blog pages to the &lt;code&gt;github.io&lt;/code&gt; site so its super easy to setup&lt;/li&gt;
+&lt;li&gt;The package &lt;code&gt;ghp-import&lt;/code&gt; and command &lt;code&gt;ghp-import output -b master&lt;/code&gt; is used to push static blog pages to the &lt;code&gt;github.io&lt;/code&gt; site so its super easy to setup&lt;ul&gt;
 &lt;li&gt;However, if you run &lt;code&gt;git status&lt;/code&gt; in your blog directory, you'll see many uncommited files since &lt;code&gt;ghp-import&lt;/code&gt; doesn't work exactly the same as &lt;code&gt;git commit&lt;/code&gt; &lt;ul&gt;
 &lt;li&gt;Thus you should be very careful with your blog directory and don't use any reset command (I learned it the hard way ...)&lt;/li&gt;
 &lt;li&gt;A better way is to setup your blog project in another private github repo and use the normal git commit workflow to catch any changes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Pelican uses Jinja templates so all Jinja tags can be used in the templates&lt;/li&gt;
