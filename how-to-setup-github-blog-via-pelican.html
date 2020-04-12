@@ -141,10 +141,11 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <li>Go to the blog root folder (i.e. <code>&lt;blogname&gt;</code> folder) and create a theme folder through <code>mkdir theme</code></li>
 <li><code>cd theme</code> and <code>git clone --recursive https://github.com/getpelican/pelican-themes pelican-themes</code></li>
 <li>Open the <code>pelicanconf.py</code> and add this line: <code>THEME = '&lt;path_to_chosen_theme&gt;'</code><ul>
-<li>For example, <code>THEME = "theme/pelican-themes/medio"</code></li>
+<li>For example, <code>theme/pelican-themes/tuxlite_tbs</code></li>
 </ul>
 </li>
 </ol>
+<p><strong>Note</strong> that once you've chosen your theme, you have to click into the theme page to see how the theme is setup, coz it might need some <em>special configuration</em> and <em>cannot</em> be used directly out of box</p>
 <h2>Run the blog locally to see what it looks like</h2>
 <ol>
 <li>Go to blog output directory: <code>cd &lt;blogname&gt;\output</code></li>
@@ -173,6 +174,18 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <li>corresponding <strong>ipynb-meta file</strong> has been created</li>
 </ul>
 <p>and then repeat the 5 steps above to publish new posts.</p>
+<h2>A bit more in-depth about the overral setup</h2>
+<ul>
+<li>This tutorial provides a ste-by-step guide to setup a Github blog via Pelican</li>
+<li>The package <code>ghp-import</code> and command <code>ghp-import output -b master</code> is used to push static blog pages to the <code>github.io</code> site so its super easy to setup</li>
+<li>However, if you run <code>git status</code> in your blog directory, you'll see many uncommited files since <code>ghp-import</code> doesn't work exactly the same as <code>git commit</code> <ul>
+<li>Thus you should be very careful with your blog directory and don't use any reset command (I learned it the hard way ...)</li>
+<li>A better way is to setup your blog project in another private github repo and use the normal git commit workflow to catch any changes</li>
+</ul>
+</li>
+<li>Pelican uses Jinja templates so all Jinja tags can be used in the templates</li>
+<li>How Pelican works is that all your blog articles are stored in the <code>content</code> folder and once you run <code>pelican content</code> it will generate static pages and store them in the <code>output</code> directory, which is used (and pushed) to <code>github.io</code> for display</li>
+</ul>
 <h2>Reference</h2>
 <ul>
 <li><a href="https://shaynemei.github.io/hackore/how_to_pelican.html#Pick-a-theme">How to Publish a Pelican Blog via GitHub</a></li>
