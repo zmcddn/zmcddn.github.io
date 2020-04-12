@@ -97,17 +97,21 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <li>timezone</li>
 </ul>
 <h2>Install Jupyter plugin for Pelican</h2>
-<p>There are a lot of plugins that are super handy for Pelican, and jupyter plugin is definitely one among them. Follow the steps below to install the plugin:
-1. Run <code>git init</code> in the blog folder
-2. <code>mkdir plugins</code>
-3. <code>git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</code>
-4. Open <code>pelicanconf.py</code> and add the following lines:
+<p>There are a lot of plugins that are super handy for Pelican, and jupyter plugin is definitely one among them. Follow the steps below to install the plugin:</p>
+<ol>
+<li>Run <code>git init</code> in the blog folder</li>
+<li><code>mkdir plugins</code></li>
+<li><code>git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</code></li>
+<li>Open <code>pelicanconf.py</code> and add the following lines:
    <code>python
    MARKUP = ('md', 'ipynb')
    PLUGIN_PATHS = ['./plugins']
    PLUGINS = ['ipynb.markup']
-   IGNORE_FILES = ['.ipynb_checkpoints']</code>
-    - The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'</p>
+   IGNORE_FILES = ['.ipynb_checkpoints']</code><ul>
+<li>The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'</li>
+</ul>
+</li>
+</ol>
 <p>There is also a github repo that has all the available plugins for Pelican and you can find it <a href="https://github.com/getpelican/pelican-plugins">here</a></p>
 <h2>Create posts from Jupyter Notebook</h2>
 <ol>
@@ -196,7 +200,6 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <ul>
 <li><a href="https://shaynemei.github.io/hackore/how_to_pelican.html#Pick-a-theme">How to Publish a Pelican Blog via GitHub</a></li>
 <li><a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/">Building a Data Science Blog for Your Portfolio</a></li>
-<li></li>
 </ul></div>
         <hr />
     </div>
