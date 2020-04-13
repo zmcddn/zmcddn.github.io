@@ -1,69 +1,62 @@
 <!DOCTYPE html>
-<html lang="english">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Carson's Tech Hut - Install pdftk on unbuntu 18.04</title>
-    <meta name="description" content="">
-    <meta name="author" content="Carson Zhang">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
-    <!--[if lt IE 9]>
-    <script src="/theme/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le styles -->
-    <link href="/theme/bootstrap.min.css" rel="stylesheet">
-    <link href="/theme/bootstrap.min.responsive.css" rel="stylesheet">
-    <link href="/theme/local.css" rel="stylesheet">
-    <link href="/theme/pygments.css" rel="stylesheet">
-
-    <!-- So Firefox can bookmark->"abo this site" -->
-        <link href="/feeds/all.atom.xml" rel="alternate" title="Carson's Tech Hut" type="application/atom+xml">
-
+  <title>Install pdftk on unbuntu 18.04</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Full Atom Feed" />
+  <link href="/feeds/tutorial.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Categories Atom Feed" />
 </head>
 
 <body>
-
-<div class="navbar">
-    <div class="navbar-inner">
-    <div class="container">
-
-         <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-         </a>
-
-        <a class="brand" href="">Carson's Tech Hut</a>
-
-        <div class="nav-collapse">
-        <ul class="nav">
-            
-        </ul>
-        </div>
-        
+  <div class="navigation pure-menu pure-menu-horizontal">
+    <div class="nav">
+      <a href="/" class="page-container pure-menu-heading  pure-menu-link nav">Carson's Tech Hut</a>
+      <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="../archives.html" class="pure-menu-link">All posts</a></li>
+          <li class="pure-menu-item"><a href="../categories.html" class="pure-menu-link">Categories</a></li>
+          <li class="pure-menu-item"><a href="../tags.html" class="pure-menu-link">Tags</a></li>
+      </ul>
     </div>
+  </div>
+
+<div class="page-container">
+    <div class="entry-content">
+      <div class="post-meta pure-u-10-24">
+          <div class="pure-u">
+              <img src="../theme/images/authors/timg.jpg" class="post-avatar" alt="Go to the profile of Carson Zhang">
+          </div>
+          <div class="pure-u meta-data">
+              <a href="/author/carson-zhang.html" class="category">Carson Zhang</a><br />
+              
+            Senior Software Developer
+        <br />
+              <abbr title="2018-06-27T00:00:00-06:00">Wed 27 June 2018</abbr>
+              • 2 min read
+          </div>
+      </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="content">
-    <div class="row">
+    <div class="article-header-container">
+        <div class="background-image-container">
 
-        <div class="span9">
-    <div class='article'>
-        <div class="content-title">
-            <h1>Install pdftk on unbuntu 18.04</h1>
-Wed 27 June 2018
-
-by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
- 
-
-
+            <div class="background-image-small">
+                <div class="title-container">
+                    <h1>Install pdftk on unbuntu 18.04</h1>
+                </div>
+            </div>
         </div>
-	
-        <div><p>PDFTK is a very handy package that handles pdfs. It could open and wrtie to existing pdfs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This tutorial is intended to save you some time/hair when you have to install PDFTK on ubuntu 18.</p>
+    </div>
+
+    <div class="entry-content">
+        <!--
+        <div align="right">
+          Author:<br>
+              <a href="/author/carson-zhang.html">Carson Zhang</a><br>
+        </div>
+        -->
+
+        <p>PDFTK is a very handy package that handles pdfs. It could open and wrtie to existing pdfs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This tutorial is intended to save you some time/hair when you have to install PDFTK on ubuntu 18.</p>
 <ol>
 <li>RUN <code>sudo apt-get update</code> to update the current libs</li>
 <li>RUN <code>sudo apt-get install libcairo2 libpango-1.0-0 libpangocairo-1.0.0 libgdk-pixbuf2.0-0 libffi-dev libmagickwand-dev</code> to install all the necessary packages</li>
@@ -105,81 +98,57 @@ by <a class="url fn" href="/author/carson-zhang.html">Carson Zhang</a>
 <li>The above way of installation was to add some ubuntu 17 reference pacakge information on the system source file on ubuntu 18, and then install the pdftk package. </li>
 <li>After the pdftk is intalled, get rid of the information that was added to the system file so that the system update won't install oldder version of packages</li>
 <li>This instruction was based on the post <a href="https://askubuntu.com/questions/1028522/how-can-i-install-pdftk-in-ubuntu-18-04-bionic"><strong>HERE</strong></a>, and it is a combination of the answers from <em>Wikrle</em> and <em>amha</em></li>
-</ul></div>
-	
-        <hr>
-
+</ul>
     </div>
+
+    <footer>
+        <div class="tags">
+            <a href="/tag/python.html">Python</a>
+            <a href="/tag/pdf.html">PDF</a>
+            <a href="/tag/pdftk.html">pdftk</a>
+            <a href="/tag/ubuntu.html">Ubuntu</a>
         </div>
+        <div class="pure-g post-footer">
+            <div class="pure-g">
+                <div class="pure-g poster-info">
+                    <div class="pure-u">
+                        <a href="/author/carson-zhang.html"><img src="../theme/images/authors/timg.jpg" alt=""></a>
+                    </div>
+                    <div class="pure-u">
+                        <h3 class="author-name"><a href="/author/carson-zhang.html">Carson Zhang</a></h3>
+                        <p class="author-description">
+                          
+            I'm a senior software developer, passionated with artificial intellgence and
+            web development.
         
-        <div class="span3">
-
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Site
-                </li>
-            
-                <li><a href="/archives.html">Archives</a>
-                <li><a href="/tags.html">Tags</a>
-
-
-
-                <li><a href="/feeds/all.atom.xml" rel="alternate">Atom feed</a></li>
-
-            </ul>
+                        </p>
+                    </div>
+                </div>
             </div>
 
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Categories
-                </li>
-                
-                <li><a href="/category/tutorials.html">tutorials</a></li>
-                   
-            </ul>
-            </div>
+            <!--
+            -->
+
+        </div>
 
 
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Links
-                </li>
-            
-                <li><a href="https://blog.getpelican.com/">Pelican</a></li>
-                <li><a href="https://www.coursera.org/">Coursera</a></li>
-                <li><a href="https://leetcode.com/">Leetcode</a></li>
-            </ul>
-            </div>
+    </footer>
 
 
-            <div class="social">
-            <div class="well" style="padding: 8px 0; background-color: #FBFBFB;">
-            <ul class="nav nav-list">
-                <li class="nav-header"> 
-                Social
-                </li>
-           
-                <li><a href="https://github.com/zmcddn">Github</a></li>
-                <li><a href="https://www.kaggle.com/">Kaggle</a></li>
-                <li><a href="https://www.python.org/">Python</a></li>
-            </ul>
-            </div>
-            </div>
+</div>
 
-        </div>  
-    </div>     </div> 
-<footer>
-<br />
-<p><a href="">Carson's Tech Hut</a> &copy; Carson Zhang 2020</p>
-</footer>
 
-</div> <!-- /container -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="/theme/bootstrap-collapse.js"></script>
- 
+  <footer class="index-footer">
+    <p><a href="">Carson's Tech Hut &copy; Carson Zhang 2020</a></p>
+  </footer>
+
+
+  <link rel="stylesheet" href="../theme/css/pure-min.css" />
+  <link rel="stylesheet" href="../theme/css/grids-responsive-min.css" />
+  <link rel="stylesheet" href="../theme/fontawesome-free-5.13.0-web/css/all.min.css" />
+  <link rel="stylesheet" href="/theme/css/main.css" />
 </body>
+
+
 </html>

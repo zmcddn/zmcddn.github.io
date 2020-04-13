@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - Tutorial</title><link href="/" rel="alternate"></link><link href="/feeds/tutorial.atom.xml" rel="self"></link><id>/</id><updated>2020-04-12T00:00:00-06:00</updated><entry><title>How to setup Github Blog via Pelican</title><link href="/how-to-setup-github-blog-via-pelican.html" rel="alternate"></link><published>2020-04-12T00:00:00-06:00</published><updated>2020-04-12T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2020-04-12:/how-to-setup-github-blog-via-pelican.html</id><summary type="html">&lt;p&gt;There are many ways to setup a Github blog, but since I love Python I think it makes sense to use Pelican, which is a Static Site Generator, Powered by Python. &lt;/p&gt;
+&lt;h2&gt;Set up environment&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a blog directory for all blog content and styles: &lt;code&gt;mkdir &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Go into the blog …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;There are many ways to setup a Github blog, but since I love Python I think it makes sense to use Pelican, which is a Static Site Generator, Powered by Python. &lt;/p&gt;
+&lt;h2&gt;Set up environment&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Create a blog directory for all blog content and styles: &lt;code&gt;mkdir &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Go into the blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Create a file called &lt;code&gt;.gitignore&lt;/code&gt;, and add in the content from &lt;a href="https://github.com/github/gitignore/blob/master/Python.gitignore"&gt;this file&lt;/a&gt;. The &lt;code&gt;.gitignore&lt;/code&gt; file is used to omitted certain dynamic compiled file when commiting your changes.&lt;/li&gt;
+&lt;li&gt;Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for &lt;a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html"&gt;Anaconda&lt;/a&gt;, &lt;a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html"&gt;pipenv&lt;/a&gt;, or &lt;a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html"&gt;virtualenv&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Create a file called &lt;code&gt;requirements.txt&lt;/code&gt; in the blog directory with the following content: 
+    &lt;code&gt;Markdown==3.2.1
+    pelican==3.7.1
+    jupyter&amp;gt;=1.0
+    ipython&amp;gt;=4.0
+    nbconvert&amp;gt;=4.0
+    beautifulsoup4
+    ghp-import==0.4.1
+    matplotlib==1.5.1&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Make sure your virtual environment is activated and run &lt;code&gt;pip install -r requirements.txt&lt;/code&gt; in the blog directory to install all of the required packages. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Create blog&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Run &lt;code&gt;pelican-quickstart&lt;/code&gt; in the blog directory and follow the interactive setup sequence.&lt;/li&gt;
+&lt;li&gt;Feel free to hit the &lt;code&gt;Enter&lt;/code&gt; key to accept the default values except for the following lines:&lt;ul&gt;
+&lt;li&gt;the title of the website&lt;/li&gt;
+&lt;li&gt;the author of the website&lt;/li&gt;
+&lt;li&gt;n for the URL prefix&lt;/li&gt;
+&lt;li&gt;timezone&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Install Jupyter plugin for Pelican&lt;/h2&gt;
+&lt;p&gt;There are a lot of plugins that are super handy for Pelican, and jupyter plugin is definitely one among them. Follow the steps below to install the plugin:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Run &lt;code&gt;git init&lt;/code&gt; in the blog folder&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkdir plugins&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Open &lt;code&gt;pelicanconf.py&lt;/code&gt; and add the following lines:
+   &lt;code&gt;python
+   MARKUP = ('md', 'ipynb')
+   PLUGIN_PATHS = ['./plugins']
+   PLUGINS = ['ipynb.markup']
+   IGNORE_FILES = ['.ipynb_checkpoints']&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;There is also a github repo that has all the available plugins for Pelican and you can find it &lt;a href="https://github.com/getpelican/pelican-plugins"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Create posts from Jupyter Notebook&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Write anything (code or markdown cells) in a jupyter notebook&lt;/li&gt;
+&lt;li&gt;Copy the file into the &lt;strong&gt;content directory&lt;/strong&gt; in the blog directory&lt;/li&gt;
+&lt;li&gt;Create a &lt;strong&gt;txt file&lt;/strong&gt; with the same name of your notebook file and an &lt;code&gt;.ipynb-meta&lt;/code&gt; extension. &lt;ul&gt;
+&lt;li&gt;For example: &lt;code&gt;first-post.ipynb-meta&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Its content should be formatted as follows:
+    &lt;code&gt;Title: First Post
+    Slug: first-post 
+    Date: 2020-04-12 12:12
+    Category: posts 
+    Tags: python, tutorial, pelican 
+    Author: Carson Z.
+    Summary: This is my first post!&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Create a GitHub Page&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Log in/Sign up for GitHub&lt;/li&gt;
+&lt;li&gt;Create a repo in your account and name it &lt;code&gt;&amp;lt;username&amp;gt;.github.io&lt;/code&gt;. &lt;ul&gt;
+&lt;li&gt;Substitute &lt;code&gt;&amp;lt;username&amp;gt;&lt;/code&gt; with your GitHub username.&lt;/li&gt;
+&lt;li&gt;For example, mine is &lt;code&gt;zmcddn&lt;/code&gt; &lt;/li&gt;
+&lt;li&gt;Refer to this &lt;a href="https://help.github.com/en/github/getting-started-with-github/create-a-repo"&gt;official guide&lt;/a&gt; for repo creation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd&lt;/code&gt; to the blog directory and run &lt;code&gt;git remote add origin git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Set &lt;code&gt;SITEURL&lt;/code&gt; in &lt;code&gt;publishconf.py&lt;/code&gt; to &lt;code&gt;http://&amp;lt;username&amp;gt;.github.io&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;For exmaple, mine is &lt;code&gt;https://zmcddn.github.io&lt;/code&gt; (remember to remove the trailing slash if there is one)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Pick a theme&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Choose a theme &lt;a href="http://www.pelicanthemes.com/"&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Go to the blog root folder (i.e. &lt;code&gt;&amp;lt;blogname&amp;gt;&lt;/code&gt; folder) and create a theme folder through &lt;code&gt;mkdir theme&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cd theme&lt;/code&gt; and &lt;code&gt;git clone --recursive https://github.com/getpelican/pelican-themes pelican-themes&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Open the &lt;code&gt;pelicanconf.py&lt;/code&gt; and add this line: &lt;code&gt;THEME = '&amp;lt;path_to_chosen_theme&amp;gt;'&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;For example, &lt;code&gt;theme/pelican-themes/tuxlite_tbs&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that once you've chosen your theme, you have to click into the theme page to see how the theme is setup, coz it might need some &lt;em&gt;special configuration&lt;/em&gt; and &lt;em&gt;cannot&lt;/em&gt; be used directly out of box&lt;/p&gt;
+&lt;h2&gt;Run the blog locally to see what it looks like&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to blog output directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;\output&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;python -m pelican.server&lt;/code&gt; to spin up the server&lt;/li&gt;
+&lt;li&gt;Open up you browser (i.e. Chrome) and type in &lt;code&gt;http://localhost:8000/&lt;/code&gt;, then you should see you blog&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you would like to see theme change or how your new article looks like, everytime you've changed anything you could run the following steps to see it locally:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;pelican content&lt;/code&gt; to create html files&lt;/li&gt;
+&lt;li&gt;Go to the output directory &lt;code&gt;cd output&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;RUn &lt;code&gt;python -m pelican.server&lt;/code&gt; to spin up the server and you can see it in your browser at &lt;code&gt;http://localhost:8000/&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Publish posts&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Create html from notebook files: &lt;code&gt;pelican content&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Use correct settings for deployment: &lt;code&gt;pelican content -s publishconf.py&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Import everything in the output folder to the master branch: &lt;code&gt;ghp-import output -b master&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Push content to GitHub Pages: &lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In the future, make sure&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pelican virtual environment is &lt;strong&gt;activated&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;notebook file containing new post is moved into &lt;strong&gt;content directory&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;corresponding &lt;strong&gt;ipynb-meta file&lt;/strong&gt; has been created&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;and then repeat the 5 steps above to publish new posts.&lt;/p&gt;
+&lt;h2&gt;A bit more in-depth about the overral setup&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;This tutorial provides a ste-by-step guide to setup a Github blog via Pelican&lt;/li&gt;
+&lt;li&gt;The package &lt;code&gt;ghp-import&lt;/code&gt; and command &lt;code&gt;ghp-import output -b master&lt;/code&gt; is used to push static blog pages to the &lt;code&gt;github.io&lt;/code&gt; site so its super easy to setup&lt;ul&gt;
+&lt;li&gt;However, if you run &lt;code&gt;git status&lt;/code&gt; in your blog directory, you'll see many uncommited files since &lt;code&gt;ghp-import&lt;/code&gt; doesn't work exactly the same as &lt;code&gt;git commit&lt;/code&gt; &lt;ul&gt;
+&lt;li&gt;Thus you should be very careful with your blog directory and don't use any reset command (I learned it the hard way ...)&lt;/li&gt;
+&lt;li&gt;A better way is to setup your blog project in another private github repo and use the normal git commit workflow to catch any changes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Pelican uses Jinja templates so all Jinja tags can be used in the templates&lt;/li&gt;
+&lt;li&gt;How Pelican works is that all your blog articles are stored in the &lt;code&gt;content&lt;/code&gt; folder and once you run &lt;code&gt;pelican content&lt;/code&gt; it will generate static pages and store them in the &lt;code&gt;output&lt;/code&gt; directory, which is used (and pushed) to &lt;code&gt;github.io&lt;/code&gt; for display&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://shaynemei.github.io/hackore/how_to_pelican.html#Pick-a-theme"&gt;How to Publish a Pelican Blog via GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/"&gt;Building a Data Science Blog for Your Portfolio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Python"></category><category term="Pelican"></category><category term="Blog"></category><category term="Github"></category></entry><entry><title>Install pdftk on unbuntu 18.04</title><link href="/install-pdftk-on-unbuntu-1804.html" rel="alternate"></link><published>2018-06-27T00:00:00-06:00</published><updated>2018-06-27T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-06-27:/install-pdftk-on-unbuntu-1804.html</id><summary type="html">&lt;p&gt;PDFTK is a very handy package that handles pdfs. It could open and wrtie to existing pdfs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This …&lt;/p&gt;</summary><content type="html">&lt;p&gt;PDFTK is a very handy package that handles pdfs. It could open and wrtie to existing pdfs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This tutorial is intended to save you some time/hair when you have to install PDFTK on ubuntu 18.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;RUN &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the current libs&lt;/li&gt;
+&lt;li&gt;RUN &lt;code&gt;sudo apt-get install libcairo2 libpango-1.0-0 libpangocairo-1.0.0 libgdk-pixbuf2.0-0 libffi-dev libmagickwand-dev&lt;/code&gt; to install all the necessary packages&lt;/li&gt;
+&lt;li&gt;RUN &lt;code&gt;locate sources.list&lt;/code&gt; to find the path for the &lt;em&gt;sources.list&lt;/em&gt; file&lt;ul&gt;
+&lt;li&gt;It is &lt;em&gt;/etc/apt/sources.list&lt;/em&gt; on my machine&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;RUN &lt;code&gt;sudo nano /etc/apt/sources.list&lt;/code&gt; to go into the file and edit it&lt;/li&gt;
+&lt;li&gt;Add the following lines to the bottom of the file:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;restricted&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful-updates&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;restricted&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful&lt;/span&gt; &lt;span class="kp"&gt;universe&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful-updates&lt;/span&gt; &lt;span class="kp"&gt;universe&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful&lt;/span&gt; &lt;span class="kp"&gt;multiverse&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful-updates&lt;/span&gt; &lt;span class="kp"&gt;multiverse&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://no.archive.ubuntu.com/ubuntu/&lt;/span&gt; &lt;span class="kp"&gt;artful-backports&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;restricted&lt;/span&gt; &lt;span class="kp"&gt;universe&lt;/span&gt; &lt;span class="kp"&gt;multiverse&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://security.ubuntu.com/ubuntu&lt;/span&gt; &lt;span class="kp"&gt;artful-security&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;restricted&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://security.ubuntu.com/ubuntu&lt;/span&gt; &lt;span class="kp"&gt;artful-security&lt;/span&gt; &lt;span class="kp"&gt;universe&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://security.ubuntu.com/ubuntu&lt;/span&gt; &lt;span class="kp"&gt;artful-security&lt;/span&gt; &lt;span class="kp"&gt;multiverse&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Use &lt;code&gt;CTRL + x&lt;/code&gt; (and hit enter) to save and quit&lt;/li&gt;
+&lt;li&gt;Update the system: &lt;code&gt;sudo apt update&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install related system packages in the folowing order:&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sudo apt-get install libgcj-common&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo apt-get install libgcj17&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Insatll the pdftk package: &lt;code&gt;sudo apt-get install pdftk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;After the pdftk package is installed, go back to the sources.list file (i.e step 4) and delete the lines we added in step 5&lt;/li&gt;
+&lt;li&gt;Update system again (i.e. step 7)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Notes:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;PDFTK package is not supported in ubuntu 18 since it depends on a previous system package, and last version that supports this package was ubuntu 17.&lt;/li&gt;
+&lt;li&gt;The above way of installation was to add some ubuntu 17 reference pacakge information on the system source file on ubuntu 18, and then install the pdftk package. &lt;/li&gt;
+&lt;li&gt;After the pdftk is intalled, get rid of the information that was added to the system file so that the system update won't install oldder version of packages&lt;/li&gt;
+&lt;li&gt;This instruction was based on the post &lt;a href="https://askubuntu.com/questions/1028522/how-can-i-install-pdftk-in-ubuntu-18-04-bionic"&gt;&lt;strong&gt;HERE&lt;/strong&gt;&lt;/a&gt;, and it is a combination of the answers from &lt;em&gt;Wikrle&lt;/em&gt; and &lt;em&gt;amha&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Python"></category><category term="PDF"></category><category term="pdftk"></category><category term="Ubuntu"></category></entry></feed>

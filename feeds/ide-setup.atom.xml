@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - IDE Setup</title><link href="/" rel="alternate"></link><link href="/feeds/ide-setup.atom.xml" rel="self"></link><id>/</id><updated>2018-07-03T00:00:00-06:00</updated><entry><title>How to create Sublime Text Project</title><link href="/how-to-create-sublime-text-project.html" rel="alternate"></link><published>2018-07-03T00:00:00-06:00</published><updated>2018-07-03T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-07-03:/how-to-create-sublime-text-project.html</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;Create a project folder to store all the sublime text project file &lt;ul&gt;
+&lt;li&gt;Sublime Text Project file is a build file that must be saved somewhere on the disk. So a good way of doing this is to save the file into a folder something similar to &lt;strong&gt;Sublimetext Project&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Open up …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;Create a project folder to store all the sublime text project file &lt;ul&gt;
+&lt;li&gt;Sublime Text Project file is a build file that must be saved somewhere on the disk. So a good way of doing this is to save the file into a folder something similar to &lt;strong&gt;Sublimetext Project&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Open up a new sublime text window with no other tabs opened.&lt;/li&gt;
+&lt;li&gt;Drag the whole project folder into the folder panel&lt;/li&gt;
+&lt;li&gt;Nevigate to the site package folder:&lt;ul&gt;
+&lt;li&gt;This folder is noramlly located at the &lt;code&gt;Envs\project_name\lib\python_version\site-packages&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Drag the entire &lt;strong&gt;site-packages&lt;/strong&gt; folder into the folder panel&lt;/li&gt;
+&lt;li&gt;Now the folder panel should have two folders: the project folder and the corresponding &lt;strong&gt;site-packages&lt;/strong&gt; folder. Then you can save this as a project and save it to the &lt;strong&gt;Sublimetext Project&lt;/strong&gt; you just created&lt;/li&gt;
+&lt;li&gt;After the sublimetext project is created, you can quickly switch among projects using shortcut &lt;code&gt;CTRL + ALT + P&lt;/code&gt;. If the shortcut doesn't work, check &lt;a href="https://forum.sublimetext.com/t/quick-switch-project-shortcut-doesnt-work-anymore/17261/2"&gt;&lt;strong&gt;HERE&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Sublime Text"></category><category term="Environment Setup"></category></entry></feed>
