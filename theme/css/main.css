@@ -71,7 +71,23 @@ div.post-content h3,div.entry-content h3{font-size:32px}
 div.post-content h4,div.entry-content h4{font-size:28px}
 div.post-content h5,div.post-content h6,div.entry-content h5,div.entry-content h6{font-size:26px}
 div.post-content h3,div.post-content h4,div.post-content h5,div.post-content h6,div.entry-content h3,div.entry-content h4,div.entry-content h5,div.entry-content h6{font-weight:300}
-div.post-content a,div.entry-content a{color:rgba(0,0,0,0.8)}
+
+/* Setup the link style in article */
+/* `:focus` is linked to `:hover` for basic accessibility */
+/* No `:visited` state is required by default (browsers will use `a`) */
+div.post-content a,div.entry-content a {
+    color: #268ad2d9;
+    text-decoration: none;
+  }
+  div.post-content a,div.entry-content a strong {
+    color: inherit;
+  }
+  /* `:focus` is linked to `:hover` for basic accessibility */
+  div.post-content a,div.entry-content a:hover,
+  div.post-content a,div.entry-content a:focus {
+    text-decoration: underline;
+  }
+
 div.post-content img,div.entry-content img{max-width:100%}
 div.post-content hr,div.entry-content hr{margin:40px auto;width:80%;border:0;text-align:center;height:1px;background-color:rgba(0,0,0,0.1)}
 @media screen and (min-width: 35.5em) {
@@ -388,12 +404,29 @@ pre,code{font-family:Consolas,"Deja Vu Sans Mono","Ubuntu Mono","Bitstream Vera 
 pre{font-size:16px;line-height:1.4;background-color:#F8F8F8;border:1px solid #E6E6E6;border-radius:4px;padding:6px 9.5px}
 code{font-size:16px;color: #c25;background-color:#F8F8F8;border:1px solid #E6E6E6;border-radius:4px;padding:2px 5px 0}
 blockquote{border-left:3px solid rgba(0,0,0,0.8);font-style:italic;padding-left:20px;margin-left:-23px;margin-bottom:30px}
+
+/* Pagination Setup */
 div.pagination{margin:20px auto}
 div.pagination div.left{text-align:left}
 div.pagination div.right{text-align:right}
-div.pagination a{display:inline-block;line-height:31px;padding:0 14px;font-size:12px;transition:100ms background-color,100ms border-color,100ms color,100ms fill;border:1px solid rgba(0,0,0,0.15);border-radius:999em;color:rgba(0,0,0,0.44);text-decoration:none}
-div.pagination a:hover{color:rgba(0,0,0,0.6);border-color:rgba(0,0,0,0.3)}
-div.pagination a:active{outline:none;color:rgba(0,0,0,0.8);border-color:rgba(0,0,0,0.6)}
+div.pagination a{
+    display:inline-block;
+    line-height:31px;
+    padding:0 14px;
+    font-size:12px;
+    transition:100ms background-color,100ms border-color,100ms color,100ms fill;
+    border:1px solid rgba(0,0,0,0.15);
+    border-radius:10px;
+    color:rgba(0,0,0,0.44);
+    text-decoration:none;
+}
+div.pagination a:hover{color:rgba(0,0,0,0.7);border-color:rgba(0,0,0,0.5)}
+div.pagination a:active{
+    outline:none;
+    color:rgba(0,0,0,0.9);
+    border-color:rgba(0,0,0,0.7);
+}
+
 .highlight .c{color:#8f5902;font-style:italic}
 .highlight .err{color:#a40000;border:1px solid #ef2929}
 .highlight .g{color:#000}

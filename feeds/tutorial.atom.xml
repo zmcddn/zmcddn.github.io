@@ -12,8 +12,7 @@
 &lt;li&gt;Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for &lt;a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html"&gt;Anaconda&lt;/a&gt;, &lt;a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html"&gt;pipenv&lt;/a&gt;, or &lt;a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html"&gt;virtualenv&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a file called &lt;code&gt;requirements.txt&lt;/code&gt; in the blog directory with the following content: &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```
-Markdown==3.2.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Markdown==3.2.1
 pelican==3.7.1
 jupyter&amp;gt;=1.0
 ipython&amp;gt;=4.0
@@ -21,7 +20,6 @@ nbconvert&amp;gt;=4.0
 beautifulsoup4
 ghp-import==0.4.1
 matplotlib==1.5.1
-```
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -49,12 +47,10 @@ matplotlib==1.5.1
 &lt;li&gt;&lt;code&gt;git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Open &lt;code&gt;pelicanconf.py&lt;/code&gt; and add the following lines:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
-MARKUP = (&amp;#39;md&amp;#39;, &amp;#39;ipynb&amp;#39;)
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;MARKUP = (&amp;#39;md&amp;#39;, &amp;#39;ipynb&amp;#39;)
 PLUGIN_PATHS = [&amp;#39;./plugins&amp;#39;]
 PLUGINS = [&amp;#39;ipynb.markup&amp;#39;]
 IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
-```
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -72,15 +68,13 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;li&gt;For example: &lt;code&gt;first-post.ipynb-meta&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;Its content should be formatted as follows:&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```
-Title: First Post
-Slug: first-post 
-Date: 2020-04-12 12:12
-Category: posts 
-Tags: python, tutorial, pelican 
-Author: Carson Z.
-Summary: This is my first post!
-```
+&lt;li&gt;Its content should be formatted as follows:&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;Post&lt;/span&gt;
+&lt;span class="n"&gt;Slug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt; 
+&lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2020&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;04&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;
+&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;posts&lt;/span&gt; 
+&lt;span class="n"&gt;Tags&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tutorial&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt; 
+&lt;span class="n"&gt;Author&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Carson&lt;/span&gt; &lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Summary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt; &lt;span class="n"&gt;first&lt;/span&gt; &lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -153,13 +147,6 @@ Summary: This is my first post!
 &lt;/li&gt;
 &lt;li&gt;Pelican uses Jinja templates so all Jinja tags can be used in the templates&lt;/li&gt;
 &lt;li&gt;How Pelican works is that all your blog articles are stored in the &lt;code&gt;content&lt;/code&gt; folder and once you run &lt;code&gt;pelican content&lt;/code&gt; it will generate static pages and store them in the &lt;code&gt;output&lt;/code&gt; directory, which is used (and pushed) to &lt;code&gt;github.io&lt;/code&gt; for display&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Tricks:&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;When using &lt;code&gt;fenced_code&lt;/code&gt; (i.e. ```) with lists, always use 4 more spaces in indentation.&lt;ul&gt;
-&lt;li&gt;For exmaple, when you have one level list, the indentation for the list is four spaces, if you would like to display your fenced code under that list, you should use &lt;strong&gt;8 spaces indentation&lt;/strong&gt; for that part of fenced code&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;
