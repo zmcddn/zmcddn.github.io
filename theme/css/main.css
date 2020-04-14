@@ -172,6 +172,8 @@ div.main-container div.heading{text-align:left}
 div.main-container div.heading div.heading-prefix{color:rgba(0,0,0,0.3);font-size:11px}
 div.main-container div.heading h3{font-weight:300;font-size:32px;margin:0}
 div.navi{text-align:center;max-width:1000px;margin:0 auto}
+
+/* Footer Styles */
 footer.index-footer{
     background-color:#3f464f;
     width:100%;
@@ -196,13 +198,35 @@ footer.index-footer a:hover{
     color:#eaeced;
     font-weight:bold;
 }
-div.post-meta img.post-avatar{max-width:62px;max-height:62px;border-radius:32px;display:inline-block;vertical-align:middle;margin-right:10px}
+footer.index-footer .footer-narrow{display: none;}
+/*
+When the screen is less than 600 pixels wide,
+Change footer into two lines
+*/
+@media screen and (max-width: 600px) {
+    footer.index-footer .footer-wide{display: none;}
+    footer.index-footer .footer-narrow{
+        display: inline-block;
+        text-align: center;
+    }
+}
+
+/* Article meta data style */
+div.post-meta img.post-avatar{
+    max-width:62px;
+    max-height:62px;
+    border-radius:32px;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:10px;
+}
 div.post-meta div.meta-data{font-size:0.68em;font-weight:400;color:rgba(0,0,0,0.55)}
 div.post-meta div.meta-data a{text-decoration:none}
 div.post-meta div.meta-data a.category{color:rgba(0,0,0,0.9);font-size:1.1em;}
 div.post-meta div.meta-data a.category:hover{color:#57ad68}
 div.post-meta div.meta-data a.author{color:rgba(0,0,0,0.9)}
 div.post-meta div.meta-data a.author:hover{color:#57ad68}
+
 div.page-container{text-align:center;margin-top:80px}
 div.page-container div.entry-content{
     max-width:700px;

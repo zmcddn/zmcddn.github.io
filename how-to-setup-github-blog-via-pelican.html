@@ -39,7 +39,7 @@
 
 <div class="page-container">
     <div class="entry-content">
-      <div class="post-meta pure-u-10-24">
+      <div class="post-meta pure-u">
           <div class="pure-u">
               <img src="../theme/images/authors/timg.jpg" class="post-avatar" alt="Go to the profile of Carson Zhang">
           </div>
@@ -218,6 +218,37 @@ IGNORE_FILES = [&#39;.ipynb_checkpoints&#39;]
 <li>Pelican uses Jinja templates so all Jinja tags can be used in the templates</li>
 <li>How Pelican works is that all your blog articles are stored in the <code>content</code> folder and once you run <code>pelican content</code> it will generate static pages and store them in the <code>output</code> directory, which is used (and pushed) to <code>github.io</code> for display</li>
 </ul>
+<h2>Summary</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Action</th>
+<th align="left">Command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Run local</td>
+<td align="left"><code>python -m pelican.server</code> in <strong>output</strong> folder</td>
+</tr>
+<tr>
+<td align="left">create HTML</td>
+<td align="left"><code>pelican content</code></td>
+</tr>
+<tr>
+<td align="left">Setup deployment</td>
+<td align="left"><code>pelican content -s publishconf.py</code></td>
+</tr>
+<tr>
+<td align="left">Setup import for github</td>
+<td align="left"><code>ghp-import output -b master</code></td>
+</tr>
+<tr>
+<td align="left">Push to github</td>
+<td align="left"><code>git push origin master</code></td>
+</tr>
+</tbody>
+</table>
 <h2>Reference</h2>
 <ul>
 <li><a href="https://shaynemei.github.io/hackore/how_to_pelican.html#Pick-a-theme">How to Publish a Pelican Blog via GitHub</a></li>
@@ -264,7 +295,13 @@ IGNORE_FILES = [&#39;.ipynb_checkpoints&#39;]
 
 
   <footer class="index-footer">
-    <p><a href="">Carson's Tech Hut</a>&copy; Carson Zhang 2020</p>
+    <div class="footer-wide">
+      <p><a href="">Carson's Tech Hut</a>&copy; Carson Zhang 2020</p>
+    </div>
+    <div class="footer-narrow">
+      <p><a href="">Carson's Tech Hut</a><br>
+      &copy; Carson Zhang 2020</p>
+    </div>
   </footer>
 
 
