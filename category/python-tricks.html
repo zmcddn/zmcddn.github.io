@@ -6,17 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Full Atom Feed" />
   <link href="/feeds/python-tricks.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Categories Atom Feed" />
+
+  <script>
+  /* Javascript code to toggle between adding and removing the
+  "responsive" class to nav when the user clicks on the icon */
+  function myFunction() {
+    var x = document.getElementById("nav-bar");
+    if (x.className === "nav") {
+      x.className += " responsive";
+    } else {
+      x.className = "nav";
+    }
+  }
+  </script>
+
 </head>
 
 <body>
   <div class="navigation pure-menu pure-menu-horizontal">
-    <div class="nav">
+    <div class="nav", id="nav-bar">
       <a href="/" class="page-container pure-menu-heading  pure-menu-link nav">Carson's Tech Hut</a>
       <ul class="pure-menu-list">
           <li class="pure-menu-item"><a href="../archives.html" class="pure-menu-link">All posts</a></li>
           <li class="pure-menu-item"><a href="../categories.html" class="pure-menu-link">Categories</a></li>
           <li class="pure-menu-item"><a href="../tags.html" class="pure-menu-link">Tags</a></li>
       </ul>
+      <a href="javascript:void(0);" class="icon pure-menu-link" onclick="myFunction()">
+        <i class="fas fa-bars"></i>
+      </a>
     </div>
   </div>
 

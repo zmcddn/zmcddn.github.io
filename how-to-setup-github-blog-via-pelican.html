@@ -6,17 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Full Atom Feed" />
   <link href="/feeds/tutorial.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Categories Atom Feed" />
+
+  <script>
+  /* Javascript code to toggle between adding and removing the
+  "responsive" class to nav when the user clicks on the icon */
+  function myFunction() {
+    var x = document.getElementById("nav-bar");
+    if (x.className === "nav") {
+      x.className += " responsive";
+    } else {
+      x.className = "nav";
+    }
+  }
+  </script>
+
 </head>
 
 <body>
   <div class="navigation pure-menu pure-menu-horizontal">
-    <div class="nav">
+    <div class="nav", id="nav-bar">
       <a href="/" class="page-container pure-menu-heading  pure-menu-link nav">Carson's Tech Hut</a>
       <ul class="pure-menu-list">
           <li class="pure-menu-item"><a href="../archives.html" class="pure-menu-link">All posts</a></li>
           <li class="pure-menu-item"><a href="../categories.html" class="pure-menu-link">Categories</a></li>
           <li class="pure-menu-item"><a href="../tags.html" class="pure-menu-link">Tags</a></li>
       </ul>
+      <a href="javascript:void(0);" class="icon pure-menu-link" onclick="myFunction()">
+        <i class="fas fa-bars"></i>
+      </a>
     </div>
   </div>
 
@@ -63,16 +80,20 @@
 <li>Go into the blog directory: <code>cd &lt;blogname&gt;</code></li>
 <li>Create a file called <code>.gitignore</code>, and add in the content from <a href="https://github.com/github/gitignore/blob/master/Python.gitignore">this file</a>. The <code>.gitignore</code> file is used to omitted certain dynamic compiled file when commiting your changes.</li>
 <li>Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for <a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html">Anaconda</a>, <a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html">pipenv</a>, or <a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html">virtualenv</a>.</li>
-<li>Create a file called <code>requirements.txt</code> in the blog directory with the following content: 
-    <code>Markdown==3.2.1
-    pelican==3.7.1
-    jupyter&gt;=1.0
-    ipython&gt;=4.0
-    nbconvert&gt;=4.0
-    beautifulsoup4
-    ghp-import==0.4.1
-    matplotlib==1.5.1</code></li>
-<li>Make sure your virtual environment is activated and run <code>pip install -r requirements.txt</code> in the blog directory to install all of the required packages. </li>
+<li>
+<p>Create a file called <code>requirements.txt</code> in the blog directory with the following content: </p>
+<p><code>Markdown==3.2.1
+pelican==3.7.1
+jupyter&gt;=1.0
+ipython&gt;=4.0
+nbconvert&gt;=4.0
+beautifulsoup4
+ghp-import==0.4.1
+matplotlib==1.5.1</code></p>
+</li>
+<li>
+<p>Make sure your virtual environment is activated and run <code>pip install -r requirements.txt</code> in the blog directory to install all of the required packages. </p>
+</li>
 </ol>
 <h2>Create blog</h2>
 <ul>
@@ -91,12 +112,14 @@
 <li>Run <code>git init</code> in the blog folder</li>
 <li><code>mkdir plugins</code></li>
 <li><code>git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</code></li>
-<li>Open <code>pelicanconf.py</code> and add the following lines:
-   <code>python
-   MARKUP = ('md', 'ipynb')
-   PLUGIN_PATHS = ['./plugins']
-   PLUGINS = ['ipynb.markup']
-   IGNORE_FILES = ['.ipynb_checkpoints']</code><ul>
+<li>
+<p>Open <code>pelicanconf.py</code> and add the following lines:</p>
+<p><code>python
+MARKUP = ('md', 'ipynb')
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['ipynb.markup']
+IGNORE_FILES = ['.ipynb_checkpoints']</code></p>
+<ul>
 <li>The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'</li>
 </ul>
 </li>
@@ -110,14 +133,16 @@
 <li>For example: <code>first-post.ipynb-meta</code></li>
 </ul>
 </li>
-<li>Its content should be formatted as follows:
-    <code>Title: First Post
-    Slug: first-post 
-    Date: 2020-04-12 12:12
-    Category: posts 
-    Tags: python, tutorial, pelican 
-    Author: Carson Z.
-    Summary: This is my first post!</code></li>
+<li>
+<p>Its content should be formatted as follows:</p>
+<p><code>Title: First Post
+Slug: first-post 
+Date: 2020-04-12 12:12
+Category: posts 
+Tags: python, tutorial, pelican 
+Author: Carson Z.
+Summary: This is my first post!</code></p>
+</li>
 </ol>
 <h2>Create a GitHub Page</h2>
 <ol>

@@ -10,16 +10,20 @@
 &lt;li&gt;Go into the blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Create a file called &lt;code&gt;.gitignore&lt;/code&gt;, and add in the content from &lt;a href="https://github.com/github/gitignore/blob/master/Python.gitignore"&gt;this file&lt;/a&gt;. The &lt;code&gt;.gitignore&lt;/code&gt; file is used to omitted certain dynamic compiled file when commiting your changes.&lt;/li&gt;
 &lt;li&gt;Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for &lt;a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html"&gt;Anaconda&lt;/a&gt;, &lt;a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html"&gt;pipenv&lt;/a&gt;, or &lt;a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html"&gt;virtualenv&lt;/a&gt;.&lt;/li&gt;
-&lt;li&gt;Create a file called &lt;code&gt;requirements.txt&lt;/code&gt; in the blog directory with the following content: 
-    &lt;code&gt;Markdown==3.2.1
-    pelican==3.7.1
-    jupyter&amp;gt;=1.0
-    ipython&amp;gt;=4.0
-    nbconvert&amp;gt;=4.0
-    beautifulsoup4
-    ghp-import==0.4.1
-    matplotlib==1.5.1&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Make sure your virtual environment is activated and run &lt;code&gt;pip install -r requirements.txt&lt;/code&gt; in the blog directory to install all of the required packages. &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a file called &lt;code&gt;requirements.txt&lt;/code&gt; in the blog directory with the following content: &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Markdown==3.2.1
+pelican==3.7.1
+jupyter&amp;gt;=1.0
+ipython&amp;gt;=4.0
+nbconvert&amp;gt;=4.0
+beautifulsoup4
+ghp-import==0.4.1
+matplotlib==1.5.1&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure your virtual environment is activated and run &lt;code&gt;pip install -r requirements.txt&lt;/code&gt; in the blog directory to install all of the required packages. &lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Create blog&lt;/h2&gt;
 &lt;ul&gt;
@@ -38,12 +42,14 @@
 &lt;li&gt;Run &lt;code&gt;git init&lt;/code&gt; in the blog folder&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;mkdir plugins&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Open &lt;code&gt;pelicanconf.py&lt;/code&gt; and add the following lines:
-   &lt;code&gt;python
-   MARKUP = ('md', 'ipynb')
-   PLUGIN_PATHS = ['./plugins']
-   PLUGINS = ['ipynb.markup']
-   IGNORE_FILES = ['.ipynb_checkpoints']&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;pelicanconf.py&lt;/code&gt; and add the following lines:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python
+MARKUP = ('md', 'ipynb')
+PLUGIN_PATHS = ['./plugins']
+PLUGINS = ['ipynb.markup']
+IGNORE_FILES = ['.ipynb_checkpoints']&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -57,14 +63,16 @@
 &lt;li&gt;For example: &lt;code&gt;first-post.ipynb-meta&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;Its content should be formatted as follows:
-    &lt;code&gt;Title: First Post
-    Slug: first-post 
-    Date: 2020-04-12 12:12
-    Category: posts 
-    Tags: python, tutorial, pelican 
-    Author: Carson Z.
-    Summary: This is my first post!&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Its content should be formatted as follows:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Title: First Post
+Slug: first-post 
+Date: 2020-04-12 12:12
+Category: posts 
+Tags: python, tutorial, pelican 
+Author: Carson Z.
+Summary: This is my first post!&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Create a GitHub Page&lt;/h2&gt;
 &lt;ol&gt;
