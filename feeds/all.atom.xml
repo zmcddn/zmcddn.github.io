@@ -12,14 +12,19 @@
 &lt;li&gt;Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for &lt;a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html"&gt;Anaconda&lt;/a&gt;, &lt;a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html"&gt;pipenv&lt;/a&gt;, or &lt;a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html"&gt;virtualenv&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a file called &lt;code&gt;requirements.txt&lt;/code&gt; in the blog directory with the following content: &lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Markdown==3.2.1
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```
+Markdown==3.2.1
 pelican==3.7.1
 jupyter&amp;gt;=1.0
 ipython&amp;gt;=4.0
 nbconvert&amp;gt;=4.0
 beautifulsoup4
 ghp-import==0.4.1
-matplotlib==1.5.1&lt;/code&gt;&lt;/p&gt;
+matplotlib==1.5.1
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Make sure your virtual environment is activated and run &lt;code&gt;pip install -r requirements.txt&lt;/code&gt; in the blog directory to install all of the required packages. &lt;/p&gt;
@@ -44,11 +49,15 @@ matplotlib==1.5.1&lt;/code&gt;&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Open &lt;code&gt;pelicanconf.py&lt;/code&gt; and add the following lines:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;python
-MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup']
-IGNORE_FILES = ['.ipynb_checkpoints']&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```python
+MARKUP = (&amp;#39;md&amp;#39;, &amp;#39;ipynb&amp;#39;)
+PLUGIN_PATHS = [&amp;#39;./plugins&amp;#39;]
+PLUGINS = [&amp;#39;ipynb.markup&amp;#39;]
+IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;ul&gt;
 &lt;li&gt;The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'&lt;/li&gt;
 &lt;/ul&gt;
@@ -63,15 +72,18 @@ IGNORE_FILES = ['.ipynb_checkpoints']&lt;/code&gt;&lt;/p&gt;
 &lt;li&gt;For example: &lt;code&gt;first-post.ipynb-meta&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Its content should be formatted as follows:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Title: First Post
+&lt;li&gt;Its content should be formatted as follows:&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;```
+Title: First Post
 Slug: first-post 
 Date: 2020-04-12 12:12
 Category: posts 
 Tags: python, tutorial, pelican 
 Author: Carson Z.
-Summary: This is my first post!&lt;/code&gt;&lt;/p&gt;
+Summary: This is my first post!
+```
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Create a GitHub Page&lt;/h2&gt;
@@ -141,6 +153,13 @@ Summary: This is my first post!&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;Pelican uses Jinja templates so all Jinja tags can be used in the templates&lt;/li&gt;
 &lt;li&gt;How Pelican works is that all your blog articles are stored in the &lt;code&gt;content&lt;/code&gt; folder and once you run &lt;code&gt;pelican content&lt;/code&gt; it will generate static pages and store them in the &lt;code&gt;output&lt;/code&gt; directory, which is used (and pushed) to &lt;code&gt;github.io&lt;/code&gt; for display&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Tricks:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;When using &lt;code&gt;fenced_code&lt;/code&gt; (i.e. ```) with lists, always use 4 more spaces in indentation.&lt;ul&gt;
+&lt;li&gt;For exmaple, when you have one level list, the indentation for the list is four spaces, if you would like to display your fenced code under that list, you should use &lt;strong&gt;8 spaces indentation&lt;/strong&gt; for that part of fenced code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;

@@ -82,14 +82,19 @@
 <li>Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for <a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html">Anaconda</a>, <a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html">pipenv</a>, or <a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html">virtualenv</a>.</li>
 <li>
 <p>Create a file called <code>requirements.txt</code> in the blog directory with the following content: </p>
-<p><code>Markdown==3.2.1
+<div class="highlight"><pre><span></span>```
+Markdown==3.2.1
 pelican==3.7.1
 jupyter&gt;=1.0
 ipython&gt;=4.0
 nbconvert&gt;=4.0
 beautifulsoup4
 ghp-import==0.4.1
-matplotlib==1.5.1</code></p>
+matplotlib==1.5.1
+```
+</pre></div>
+
+
 </li>
 <li>
 <p>Make sure your virtual environment is activated and run <code>pip install -r requirements.txt</code> in the blog directory to install all of the required packages. </p>
@@ -114,11 +119,15 @@ matplotlib==1.5.1</code></p>
 <li><code>git submodule add git://github.com/danielfrg/pelican-ipynb.git plugins/ipynb</code></li>
 <li>
 <p>Open <code>pelicanconf.py</code> and add the following lines:</p>
-<p><code>python
-MARKUP = ('md', 'ipynb')
-PLUGIN_PATHS = ['./plugins']
-PLUGINS = ['ipynb.markup']
-IGNORE_FILES = ['.ipynb_checkpoints']</code></p>
+<div class="highlight"><pre><span></span>```python
+MARKUP = (&#39;md&#39;, &#39;ipynb&#39;)
+PLUGIN_PATHS = [&#39;./plugins&#39;]
+PLUGINS = [&#39;ipynb.markup&#39;]
+IGNORE_FILES = [&#39;.ipynb_checkpoints&#39;]
+```
+</pre></div>
+
+
 <ul>
 <li>The first 3 lines of code tell Pelican to activate the plugin when generating HTML and the last line fixes a common error 'Could not find metadata...'</li>
 </ul>
@@ -133,15 +142,18 @@ IGNORE_FILES = ['.ipynb_checkpoints']</code></p>
 <li>For example: <code>first-post.ipynb-meta</code></li>
 </ul>
 </li>
-<li>
-<p>Its content should be formatted as follows:</p>
-<p><code>Title: First Post
+<li>Its content should be formatted as follows:<div class="highlight"><pre><span></span>```
+Title: First Post
 Slug: first-post 
 Date: 2020-04-12 12:12
 Category: posts 
 Tags: python, tutorial, pelican 
 Author: Carson Z.
-Summary: This is my first post!</code></p>
+Summary: This is my first post!
+```
+</pre></div>
+
+
 </li>
 </ol>
 <h2>Create a GitHub Page</h2>
@@ -211,6 +223,13 @@ Summary: This is my first post!</code></p>
 </li>
 <li>Pelican uses Jinja templates so all Jinja tags can be used in the templates</li>
 <li>How Pelican works is that all your blog articles are stored in the <code>content</code> folder and once you run <code>pelican content</code> it will generate static pages and store them in the <code>output</code> directory, which is used (and pushed) to <code>github.io</code> for display</li>
+</ul>
+<h2>Tricks:</h2>
+<ul>
+<li>When using <code>fenced_code</code> (i.e. ```) with lists, always use 4 more spaces in indentation.<ul>
+<li>For exmaple, when you have one level list, the indentation for the list is four spaces, if you would like to display your fenced code under that list, you should use <strong>8 spaces indentation</strong> for that part of fenced code</li>
+</ul>
+</li>
 </ul>
 <h2>Reference</h2>
 <ul>
