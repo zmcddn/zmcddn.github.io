@@ -11,8 +11,8 @@
 &lt;/li&gt;
 &lt;li&gt;Open up a new sublime text window with no other tabs opened.&lt;/li&gt;
 &lt;li&gt;Drag the whole project folder into the folder panel&lt;/li&gt;
-&lt;li&gt;Nevigate to the site package folder:&lt;ul&gt;
-&lt;li&gt;This folder is noramlly located at the &lt;code&gt;Envs\project_name\lib\python_version\site-packages&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Navigate to the site package folder:&lt;ul&gt;
+&lt;li&gt;This folder is normally located at the &lt;code&gt;Envs\project_name\lib\python_version\site-packages&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;Drag the entire &lt;strong&gt;site-packages&lt;/strong&gt; folder into the folder panel&lt;/li&gt;

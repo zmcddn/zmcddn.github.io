@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - Python Environment</title><link href="/" rel="alternate"></link><link href="/feeds/python-environment.atom.xml" rel="self"></link><id>/</id><updated>2018-10-10T00:00:00-06:00</updated><entry><title>Pipenv Tutorial - the official package control for pyton</title><link href="/pipenv-tutorial-the-official-package-control-for-pyton.html" rel="alternate"></link><published>2018-10-10T00:00:00-06:00</published><updated>2018-10-10T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-10-10:/pipenv-tutorial-the-official-package-control-for-pyton.html</id><summary type="html">&lt;h2&gt;Why use Pipenv:&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - Python Environment</title><link href="/" rel="alternate"></link><link href="/feeds/python-environment.atom.xml" rel="self"></link><id>/</id><updated>2018-10-10T00:00:00-06:00</updated><entry><title>Pipenv Tutorial - the official package control for python</title><link href="/pipenv-tutorial-the-official-package-control-for-python.html" rel="alternate"></link><published>2018-10-10T00:00:00-06:00</published><updated>2018-10-10T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-10-10:/pipenv-tutorial-the-official-package-control-for-python.html</id><summary type="html">&lt;h2&gt;Why use Pipenv:&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Pipenv is essentially a combination of pip and virtualenv (i.e. makes virtual environment), but with better version control&lt;/li&gt;
 &lt;li&gt;It solves the version conflict for packages and sub-dependencies&lt;/li&gt;
@@ -20,7 +20,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Create/Enter virtual enviornment: &lt;code&gt;pipenv shell&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Create/Enter virtual environment: &lt;code&gt;pipenv shell&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;This will create a virtual environment if one doesn’t already exist in a default location.&lt;/li&gt;
 &lt;li&gt;Here is &lt;a href="https://pipenv.readthedocs.io/en/latest/advanced/#configuration-with-environment-variables"&gt;a list of environment variable&lt;/a&gt; to setup in order to change the default behavior&lt;/li&gt;
@@ -35,7 +35,7 @@
 &lt;p&gt;Install package: same as using &lt;code&gt;pip&lt;/code&gt;, but use &lt;code&gt;pipenv&lt;/code&gt; instead&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;After the installation, two files are generated: &lt;code&gt;Pipfile&lt;/code&gt; and &lt;code&gt;Pipfile.lock&lt;/code&gt;, which are used for package version control&lt;/li&gt;
-&lt;li&gt;If the package cannot be installed due to package confliction, use the &lt;code&gt;--skip-lock&lt;/code&gt; argument to skip the package version lock.&lt;ul&gt;
+&lt;li&gt;If the package cannot be installed due to package conflict, use the &lt;code&gt;--skip-lock&lt;/code&gt; argument to skip the package version lock.&lt;ul&gt;
 &lt;li&gt;For example, &lt;code&gt;pipenv install django --skip-lock&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -148,7 +148,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;What if you alerady have a requirements.txt file&lt;/h2&gt;
+&lt;h2&gt;What if you already have a requirements.txt file&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;pipenv install&lt;/code&gt; should automatically detect the &lt;code&gt;requirements.txt&lt;/code&gt; and convert it to a &lt;code&gt;Pipfile&lt;/code&gt;&lt;/p&gt;
@@ -190,14 +190,14 @@
 &lt;li&gt;&lt;a href="https://pipenv.readthedocs.io/en/latest/basics/"&gt;Basic Usage of Pipenv&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://feici02.github.io/2017/09/24/pipenv-cheatsheet.html"&gt;Pipenv Cheatsheet | feici02’s tidbits&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><category term="Python"></category><category term="Pipenv"></category><category term="Virtualenv"></category><category term="setup"></category></entry><entry><title>Setup Virtualenv for Any Project</title><link href="/setup-virtualenv-for-any-project.html" rel="alternate"></link><published>2018-07-04T00:00:00-06:00</published><updated>2018-07-04T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-07-04:/setup-virtualenv-for-any-project.html</id><summary type="html">&lt;ul&gt;
-&lt;li&gt;Virtualenv is a very handy tool for creating seperate virtual environments for python projects.&lt;/li&gt;
+&lt;li&gt;Virtualenv is a very handy tool for creating separate virtual environments for python projects.&lt;/li&gt;
 &lt;li&gt;It is essential and probably mandatory in many cases to use Virtualenv or Virtualenv-like tools (i.e. Anaconda, Pipenv) to run a python project.&lt;/li&gt;
 &lt;li&gt;In this tutorial, I'll show you how to create a virtualenv for …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
-&lt;li&gt;Virtualenv is a very handy tool for creating seperate virtual environments for python projects.&lt;/li&gt;
+&lt;li&gt;Virtualenv is a very handy tool for creating separate virtual environments for python projects.&lt;/li&gt;
 &lt;li&gt;It is essential and probably mandatory in many cases to use Virtualenv or Virtualenv-like tools (i.e. Anaconda, Pipenv) to run a python project.&lt;/li&gt;
 &lt;li&gt;In this tutorial, I'll show you how to create a virtualenv for a python project step-by-step. &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; the commends in this tutorial is for Linux/Mac OS, Windows will be slightly differnet when setting up environment variables and system path&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; the commends in this tutorial is for Linux/Mac OS, Windows will be slightly different when setting up environment variables and system path&lt;/p&gt;
 &lt;h2&gt;Setup virtualenv&lt;/h2&gt;
 &lt;h4&gt;1. Install pip&lt;/h4&gt;
 &lt;ul&gt;
@@ -223,14 +223,14 @@
 &lt;h4&gt;5. Set WORKON_HOME to your virtualenv&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;export WORKON_HOME=~/Desktop/Projects/Env&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;If the virtualenv folder is located at the root directary, use:&lt;ul&gt;
+&lt;li&gt;If the virtualenv folder is located at the root directory, use:&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;export WORKON_HOME=~/.Env&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;6. Add &lt;code&gt;virtualenvwrapper.sh&lt;/code&gt; to &lt;code&gt;.bashrc&lt;/code&gt; (&lt;strong&gt;NOTE&lt;/strong&gt; its &lt;code&gt;.zshrc&lt;/code&gt; on Mac)&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;Nevigate to the folder where the virtualenv is installed (normally under /usr/local/bin)&lt;/li&gt;
+&lt;li&gt;Navigate to the folder where the virtualenv is installed (normally under /usr/local/bin)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;nano ~/.bashrc&lt;/code&gt; (&lt;code&gt;nano ~/.zshrc&lt;/code&gt; on Mac)&lt;/li&gt;
 &lt;li&gt;Add the following line to the folder:&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;. /usr/local/bin/virtualenvwrapper.sh&lt;/code&gt;&lt;/li&gt;
@@ -257,7 +257,7 @@
 &lt;/ul&gt;
 &lt;h4&gt;3. get the project&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;nevigate to the directory that you would like to download the project&lt;/li&gt;
+&lt;li&gt;navigate to the directory that you would like to download the project&lt;/li&gt;
 &lt;li&gt;get the project: &lt;code&gt;git clone&lt;/code&gt; &lt;/li&gt;
 &lt;li&gt;From the directory you could tell which python version the project is under&lt;/li&gt;
 &lt;/ul&gt;
@@ -273,13 +273,13 @@
 &lt;/ul&gt;
 &lt;h4&gt;6. setup default startup folder for the environment&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;nevigate to the folder where you work all the time&lt;/li&gt;
+&lt;li&gt;navigate to the folder where you work all the time&lt;/li&gt;
 &lt;li&gt;setup the folder as default: &lt;code&gt;setvirtualenvproject&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;once the defaul folder is setup, use &lt;code&gt;cdproject&lt;/code&gt; to go back from anywhere&lt;/li&gt;
+&lt;li&gt;once the default folder is setup, use &lt;code&gt;cdproject&lt;/code&gt; to go back from anywhere&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;7. install dev tools:&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;If the project has a different requirements file for the devs, nevigate tothat folder&lt;/li&gt;
+&lt;li&gt;If the project has a different requirements file for the devs, navigate to that folder&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;pip install -r /requirements/dev.txt&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4&gt;8. remove environment&lt;/h4&gt;
@@ -337,7 +337,7 @@
 &lt;li&gt;The reason I choose Anaconda over Virtualenv is because Anaconda is widely …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;The need for setting up a virtual executing environment of Python has a lot of advantages and has been widely discussed over internet. Here I have a tutorial for setting up multiple environment with Anaconda and Sublime Text.  &lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The reason I choose Anaconda over Virtualenv is because Anaconda is widely used in the industry, especially in the big data and machine learning field, and it covers most functions of Virtualenv.   &lt;/li&gt;
-&lt;li&gt;I choose Sublime Text as my IDE because it is very simple yet powful with many plugins. It is way faster and more efficient than many other IDES.  &lt;/li&gt;
+&lt;li&gt;I choose Sublime Text as my IDE because it is very simple yet powerful with many plugins. It is way faster and more efficient than many other IDES.  &lt;/li&gt;
 &lt;li&gt;The installation of Anaconda will not be covered here as there are many tutorials online already.  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The tutorial has the following steps:&lt;/p&gt;

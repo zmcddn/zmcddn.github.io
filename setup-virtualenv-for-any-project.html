@@ -74,11 +74,11 @@
         -->
 
         <ul>
-<li>Virtualenv is a very handy tool for creating seperate virtual environments for python projects.</li>
+<li>Virtualenv is a very handy tool for creating separate virtual environments for python projects.</li>
 <li>It is essential and probably mandatory in many cases to use Virtualenv or Virtualenv-like tools (i.e. Anaconda, Pipenv) to run a python project.</li>
 <li>In this tutorial, I'll show you how to create a virtualenv for a python project step-by-step. </li>
 </ul>
-<p><strong>NOTE:</strong> the commends in this tutorial is for Linux/Mac OS, Windows will be slightly differnet when setting up environment variables and system path</p>
+<p><strong>NOTE:</strong> the commends in this tutorial is for Linux/Mac OS, Windows will be slightly different when setting up environment variables and system path</p>
 <h2>Setup virtualenv</h2>
 <h4>1. Install pip</h4>
 <ul>
@@ -104,14 +104,14 @@
 <h4>5. Set WORKON_HOME to your virtualenv</h4>
 <ul>
 <li><code>export WORKON_HOME=~/Desktop/Projects/Env</code></li>
-<li>If the virtualenv folder is located at the root directary, use:<ul>
+<li>If the virtualenv folder is located at the root directory, use:<ul>
 <li><code>export WORKON_HOME=~/.Env</code></li>
 </ul>
 </li>
 </ul>
 <h4>6. Add <code>virtualenvwrapper.sh</code> to <code>.bashrc</code> (<strong>NOTE</strong> its <code>.zshrc</code> on Mac)</h4>
 <ul>
-<li>Nevigate to the folder where the virtualenv is installed (normally under /usr/local/bin)</li>
+<li>Navigate to the folder where the virtualenv is installed (normally under /usr/local/bin)</li>
 <li><code>nano ~/.bashrc</code> (<code>nano ~/.zshrc</code> on Mac)</li>
 <li>Add the following line to the folder:<ul>
 <li><code>. /usr/local/bin/virtualenvwrapper.sh</code></li>
@@ -138,7 +138,7 @@
 </ul>
 <h4>3. get the project</h4>
 <ul>
-<li>nevigate to the directory that you would like to download the project</li>
+<li>navigate to the directory that you would like to download the project</li>
 <li>get the project: <code>git clone</code> </li>
 <li>From the directory you could tell which python version the project is under</li>
 </ul>
@@ -154,13 +154,13 @@
 </ul>
 <h4>6. setup default startup folder for the environment</h4>
 <ul>
-<li>nevigate to the folder where you work all the time</li>
+<li>navigate to the folder where you work all the time</li>
 <li>setup the folder as default: <code>setvirtualenvproject</code></li>
-<li>once the defaul folder is setup, use <code>cdproject</code> to go back from anywhere</li>
+<li>once the default folder is setup, use <code>cdproject</code> to go back from anywhere</li>
 </ul>
 <h4>7. install dev tools:</h4>
 <ul>
-<li>If the project has a different requirements file for the devs, nevigate tothat folder</li>
+<li>If the project has a different requirements file for the devs, navigate to that folder</li>
 <li><code>pip install -r /requirements/dev.txt</code></li>
 </ul>
 <h4>8. remove environment</h4>

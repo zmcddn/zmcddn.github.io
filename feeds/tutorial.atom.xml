@@ -8,7 +8,7 @@
 &lt;ol&gt;
 &lt;li&gt;Create a blog directory for all blog content and styles: &lt;code&gt;mkdir &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Go into the blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Create a file called &lt;code&gt;.gitignore&lt;/code&gt;, and add in the content from &lt;a href="https://github.com/github/gitignore/blob/master/Python.gitignore"&gt;this file&lt;/a&gt;. The &lt;code&gt;.gitignore&lt;/code&gt; file is used to omitted certain dynamic compiled file when commiting your changes.&lt;/li&gt;
+&lt;li&gt;Create a file called &lt;code&gt;.gitignore&lt;/code&gt;, and add in the content from &lt;a href="https://github.com/github/gitignore/blob/master/Python.gitignore"&gt;this file&lt;/a&gt;. The &lt;code&gt;.gitignore&lt;/code&gt; file is used to omitted certain dynamic compiled file when commit your changes.&lt;/li&gt;
 &lt;li&gt;Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for &lt;a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html"&gt;Anaconda&lt;/a&gt;, &lt;a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html"&gt;pipenv&lt;/a&gt;, or &lt;a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html"&gt;virtualenv&lt;/a&gt;.&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Create a file called &lt;code&gt;requirements.txt&lt;/code&gt; in the blog directory with the following content: &lt;/p&gt;
@@ -91,7 +91,7 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;cd&lt;/code&gt; to the blog directory and run &lt;code&gt;git remote add origin git@github.com:&amp;lt;username&amp;gt;/&amp;lt;username&amp;gt;.github.io.git&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Set &lt;code&gt;SITEURL&lt;/code&gt; in &lt;code&gt;publishconf.py&lt;/code&gt; to &lt;code&gt;http://&amp;lt;username&amp;gt;.github.io&lt;/code&gt;&lt;ul&gt;
-&lt;li&gt;For exmaple, mine is &lt;code&gt;https://zmcddn.github.io&lt;/code&gt; (remember to remove the trailing slash if there is one)&lt;/li&gt;
+&lt;li&gt;For example, mine is &lt;code&gt;https://zmcddn.github.io&lt;/code&gt; (remember to remove the trailing slash if there is one)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -112,7 +112,7 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;li&gt;Run &lt;code&gt;python -m pelican.server&lt;/code&gt; to spin up the server&lt;/li&gt;
 &lt;li&gt;Open up you browser (i.e. Chrome) and type in &lt;code&gt;http://localhost:8000/&lt;/code&gt;, then you should see you blog&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;If you would like to see theme change or how your new article looks like, everytime you've changed anything you could run the following steps to see it locally:&lt;/p&gt;
+&lt;p&gt;If you would like to see theme change or how your new article looks like,  each time you've changed anything you could run the following steps to see it locally:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Go to blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;pelican content&lt;/code&gt; to create html files&lt;/li&gt;
@@ -134,11 +134,11 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;li&gt;corresponding &lt;strong&gt;ipynb-meta file&lt;/strong&gt; has been created&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;and then repeat the 5 steps above to publish new posts.&lt;/p&gt;
-&lt;h2&gt;A bit more in-depth about the overral setup&lt;/h2&gt;
+&lt;h2&gt;A bit more in-depth about the overall setup&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;This tutorial provides a ste-by-step guide to setup a Github blog via Pelican&lt;/li&gt;
 &lt;li&gt;The package &lt;code&gt;ghp-import&lt;/code&gt; and command &lt;code&gt;ghp-import output -b master&lt;/code&gt; is used to push static blog pages to the &lt;code&gt;github.io&lt;/code&gt; site so its super easy to setup&lt;ul&gt;
-&lt;li&gt;However, if you run &lt;code&gt;git status&lt;/code&gt; in your blog directory, you'll see many uncommited files since &lt;code&gt;ghp-import&lt;/code&gt; doesn't work exactly the same as &lt;code&gt;git commit&lt;/code&gt; &lt;ul&gt;
+&lt;li&gt;However, if you run &lt;code&gt;git status&lt;/code&gt; in your blog directory, you'll see many uncommitted files since &lt;code&gt;ghp-import&lt;/code&gt; doesn't work exactly the same as &lt;code&gt;git commit&lt;/code&gt; &lt;ul&gt;
 &lt;li&gt;Thus you should be very careful with your blog directory and don't use any reset command (I learned it the hard way ...)&lt;/li&gt;
 &lt;li&gt;A better way is to setup your blog project in another private github repo and use the normal git commit workflow to catch any changes&lt;/li&gt;
 &lt;/ul&gt;
@@ -183,7 +183,7 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://shaynemei.github.io/hackore/how_to_pelican.html#Pick-a-theme"&gt;How to Publish a Pelican Blog via GitHub&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/"&gt;Building a Data Science Blog for Your Portfolio&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="Python"></category><category term="Pelican"></category><category term="Blog"></category><category term="Github"></category></entry><entry><title>Install pdftk on unbuntu 18.04</title><link href="/install-pdftk-on-unbuntu-1804.html" rel="alternate"></link><published>2018-06-27T00:00:00-06:00</published><updated>2018-06-27T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-06-27:/install-pdftk-on-unbuntu-1804.html</id><summary type="html">&lt;p&gt;PDFTK is a very handy package that handles pdfs. It could open and wrtie to existing pdfs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This …&lt;/p&gt;</summary><content type="html">&lt;p&gt;PDFTK is a very handy package that handles pdfs. It could open and wrtie to existing pdfs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This tutorial is intended to save you some time/hair when you have to install PDFTK on ubuntu 18.&lt;/p&gt;
+&lt;/ul&gt;</content><category term="Python"></category><category term="Pelican"></category><category term="Blog"></category><category term="Github"></category></entry><entry><title>Install pdftk on unbuntu 18.04</title><link href="/install-pdftk-on-unbuntu-1804.html" rel="alternate"></link><published>2018-06-27T00:00:00-06:00</published><updated>2018-06-27T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2018-06-27:/install-pdftk-on-unbuntu-1804.html</id><summary type="html">&lt;p&gt;PDFTK is a very handy package that handles PDFs. It could open and write to existing PDFs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This …&lt;/p&gt;</summary><content type="html">&lt;p&gt;PDFTK is a very handy package that handles PDFs. It could open and write to existing PDFs, and a lot of other great things. However, it is missing from the Ubuntu 18 and is very tricky to install on Ubuntu 18 (but works nice and smoothly on Ubuntu 16). This tutorial is intended to save you some time/hair when you have to install PDFTK on ubuntu 18.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;RUN &lt;code&gt;sudo apt-get update&lt;/code&gt; to update the current libs&lt;/li&gt;
 &lt;li&gt;RUN &lt;code&gt;sudo apt-get install libcairo2 libpango-1.0-0 libpangocairo-1.0.0 libgdk-pixbuf2.0-0 libffi-dev libmagickwand-dev&lt;/code&gt; to install all the necessary packages&lt;/li&gt;
@@ -215,14 +215,14 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;li&gt;&lt;code&gt;sudo apt-get install libgcj17&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;Insatll the pdftk package: &lt;code&gt;sudo apt-get install pdftk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install the pdftk package: &lt;code&gt;sudo apt-get install pdftk&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;After the pdftk package is installed, go back to the sources.list file (i.e step 4) and delete the lines we added in step 5&lt;/li&gt;
 &lt;li&gt;Update system again (i.e. step 7)&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4&gt;Notes:&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;PDFTK package is not supported in ubuntu 18 since it depends on a previous system package, and last version that supports this package was ubuntu 17.&lt;/li&gt;
-&lt;li&gt;The above way of installation was to add some ubuntu 17 reference pacakge information on the system source file on ubuntu 18, and then install the pdftk package. &lt;/li&gt;
-&lt;li&gt;After the pdftk is intalled, get rid of the information that was added to the system file so that the system update won't install oldder version of packages&lt;/li&gt;
+&lt;li&gt;The above way of installation was to add some ubuntu 17 reference package information on the system source file on ubuntu 18, and then install the pdftk package. &lt;/li&gt;
+&lt;li&gt;After the pdftk is installed, get rid of the information that was added to the system file so that the system update won't install older version of packages&lt;/li&gt;
 &lt;li&gt;This instruction was based on the post &lt;a href="https://askubuntu.com/questions/1028522/how-can-i-install-pdftk-in-ubuntu-18-04-bionic"&gt;&lt;strong&gt;HERE&lt;/strong&gt;&lt;/a&gt;, and it is a combination of the answers from &lt;em&gt;Wikrle&lt;/em&gt; and &lt;em&gt;amha&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;</content><category term="Python"></category><category term="PDF"></category><category term="pdftk"></category><category term="Ubuntu"></category></entry></feed>

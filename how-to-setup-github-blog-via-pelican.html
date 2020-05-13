@@ -78,7 +78,7 @@
 <ol>
 <li>Create a blog directory for all blog content and styles: <code>mkdir &lt;blogname&gt;</code></li>
 <li>Go into the blog directory: <code>cd &lt;blogname&gt;</code></li>
-<li>Create a file called <code>.gitignore</code>, and add in the content from <a href="https://github.com/github/gitignore/blob/master/Python.gitignore">this file</a>. The <code>.gitignore</code> file is used to omitted certain dynamic compiled file when commiting your changes.</li>
+<li>Create a file called <code>.gitignore</code>, and add in the content from <a href="https://github.com/github/gitignore/blob/master/Python.gitignore">this file</a>. The <code>.gitignore</code> file is used to omitted certain dynamic compiled file when commit your changes.</li>
 <li>Install and activate a virtual environment. You could use Anaconda, pipenv, or virtualenv. You can see my tutorials for <a href="https://zmcddn.github.io/the-ultimate-guide-to-setup-multiple-python-environment-with-anaconda-and-sublime-text.html">Anaconda</a>, <a href="https://zmcddn.github.io/pipenv-tutorial-the-official-package-control-for-pyton.html">pipenv</a>, or <a href="https://zmcddn.github.io/setup-virtualenv-for-any-project.html">virtualenv</a>.</li>
 <li>
 <p>Create a file called <code>requirements.txt</code> in the blog directory with the following content: </p>
@@ -161,7 +161,7 @@ IGNORE_FILES = [&#39;.ipynb_checkpoints&#39;]
 </li>
 <li><code>cd</code> to the blog directory and run <code>git remote add origin git@github.com:&lt;username&gt;/&lt;username&gt;.github.io.git</code></li>
 <li>Set <code>SITEURL</code> in <code>publishconf.py</code> to <code>http://&lt;username&gt;.github.io</code><ul>
-<li>For exmaple, mine is <code>https://zmcddn.github.io</code> (remember to remove the trailing slash if there is one)</li>
+<li>For example, mine is <code>https://zmcddn.github.io</code> (remember to remove the trailing slash if there is one)</li>
 </ul>
 </li>
 </ol>
@@ -182,7 +182,7 @@ IGNORE_FILES = [&#39;.ipynb_checkpoints&#39;]
 <li>Run <code>python -m pelican.server</code> to spin up the server</li>
 <li>Open up you browser (i.e. Chrome) and type in <code>http://localhost:8000/</code>, then you should see you blog</li>
 </ol>
-<p>If you would like to see theme change or how your new article looks like, everytime you've changed anything you could run the following steps to see it locally:</p>
+<p>If you would like to see theme change or how your new article looks like,  each time you've changed anything you could run the following steps to see it locally:</p>
 <ol>
 <li>Go to blog directory: <code>cd &lt;blogname&gt;</code></li>
 <li>Run <code>pelican content</code> to create html files</li>
@@ -204,11 +204,11 @@ IGNORE_FILES = [&#39;.ipynb_checkpoints&#39;]
 <li>corresponding <strong>ipynb-meta file</strong> has been created</li>
 </ul>
 <p>and then repeat the 5 steps above to publish new posts.</p>
-<h2>A bit more in-depth about the overral setup</h2>
+<h2>A bit more in-depth about the overall setup</h2>
 <ul>
 <li>This tutorial provides a ste-by-step guide to setup a Github blog via Pelican</li>
 <li>The package <code>ghp-import</code> and command <code>ghp-import output -b master</code> is used to push static blog pages to the <code>github.io</code> site so its super easy to setup<ul>
-<li>However, if you run <code>git status</code> in your blog directory, you'll see many uncommited files since <code>ghp-import</code> doesn't work exactly the same as <code>git commit</code> <ul>
+<li>However, if you run <code>git status</code> in your blog directory, you'll see many uncommitted files since <code>ghp-import</code> doesn't work exactly the same as <code>git commit</code> <ul>
 <li>Thus you should be very careful with your blog directory and don't use any reset command (I learned it the hard way ...)</li>
 <li>A better way is to setup your blog project in another private github repo and use the normal git commit workflow to catch any changes</li>
 </ul>
