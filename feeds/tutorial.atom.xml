@@ -115,7 +115,7 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;p&gt;If you would like to see theme change or how your new article looks like,  each time you've changed anything you could run the following steps to see it locally:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Go to blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;pelican content&lt;/code&gt; to create html files&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;pelican content -s publishconf.py&lt;/code&gt; to create html files&lt;/li&gt;
 &lt;li&gt;Go to the output directory &lt;code&gt;cd output&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;RUn &lt;code&gt;python -m pelican.server&lt;/code&gt; to spin up the server and you can see it in your browser at &lt;code&gt;http://localhost:8000/&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - Linux System</title><link href="/" rel="alternate"></link><link href="/feeds/linux-system.atom.xml" rel="self"></link><id>/</id><updated>2020-12-02T00:00:00-07:00</updated><entry><title>How to fix Manjaro you are unable to bood, you need to load kernel first</title><link href="/how-to-fix-manjaro-you-are-unable-to-bood-you-need-to-load-kernel-first.html" rel="alternate"></link><published>2020-12-02T00:00:00-07:00</published><updated>2020-12-02T00:00:00-07:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2020-12-02:/how-to-fix-manjaro-you-are-unable-to-bood-you-need-to-load-kernel-first.html</id><summary type="html">&lt;p&gt;I have a due boot system and one day after I updated my Manjaro system, I got this error:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file ‘/boot/vmlinuz-5.7-x86_64’ not found&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;you need to load the kernel first.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;After some research, here I found the solution how to fix it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure internet is connected&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;I have a due boot system and one day after I updated my Manjaro system, I got this error:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;file ‘/boot/vmlinuz-5.7-x86_64’ not found&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;you need to load the kernel first.&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;After some research, here I found the solution how to fix it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Make sure internet is connected&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo manjaro-chroot -a&lt;/code&gt;  (type 1 if only one line appears)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pacman-mirrors -f &amp;amp;&amp;amp; pacman -Syyu&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mkinitcpio -P&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;update-grub&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sync&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;exit&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The error was ultimately due to the fact that the Pacman has some change in the source code so if the IOS installation version is lower than 18.1.5 this error could happen.&lt;/p&gt;
+&lt;p&gt;Reference:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://laplacetw.github.io/linux-need-to-load-kernel-first/"&gt;Manjaro:You need to load kernel first&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://forum.manjaro.org/t/manjaro-unable-to-boot-error-file-boot-vmlinuz-5-7-x86-64-not-found/18445"&gt;Manjaro unable to boot (error: file '/boot/vmlinuz-5.7-x86_64' not found')&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Linux"></category><category term="Arch Linux"></category><category term="Manjaro"></category><category term="Boot"></category></entry></feed>
