@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Display matplotlib image on HTML page using Django</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Full Atom Feed" />
+  <link href="/feeds/django.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Categories Atom Feed" />
+
+  <script>
+  /* Javascript code to toggle between adding and removing the
+  "responsive" class to nav when the user clicks on the icon */
+  function myFunction() {
+    var x = document.getElementById("nav-bar");
+    if (x.className === "nav") {
+      x.className += " responsive";
+    } else {
+      x.className = "nav";
+    }
+  }
+  </script>
+
+</head>
+
+<body>
+  <div class="navigation pure-menu pure-menu-horizontal">
+    <div class="nav", id="nav-bar">
+      <a href="/" class="page-container pure-menu-heading  pure-menu-link nav">Carson's Tech Hut</a>
+      <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="../archives.html" class="pure-menu-link">All posts</a></li>
+          <li class="pure-menu-item"><a href="../categories.html" class="pure-menu-link">Categories</a></li>
+          <li class="pure-menu-item"><a href="../tags.html" class="pure-menu-link">Tags</a></li>
+      </ul>
+      <a href="javascript:void(0);" class="icon pure-menu-link" onclick="myFunction()">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+  </div>
+
+<div class="page-container">
+    <div class="entry-content">
+      <div class="post-meta pure-u">
+          <div class="pure-u">
+              <img src="../theme/images/authors/Logo.png" class="post-avatar" alt="Go to the profile of Carson Zhang">
+          </div>
+          <div class="pure-u meta-data">
+              <a href="/author/carson-zhang.html" class="category">Carson Zhang</a><br />
+              
+            Senior Software Developer
+        <br />
+              <abbr title="2020-12-09T00:00:00-07:00">Wed 09 December 2020</abbr>
+              • 7 min read
+          </div>
+      </div>
+    </div>
+
+    <div class="article-header-container">
+        <div class="background-image-container">
+
+            <div class="background-image-small">
+                <div class="title-container">
+                    <h1>Display matplotlib image on HTML page using Django</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="entry-content">
+        <!--
+        <div align="right">
+          Author:<br>
+              <a href="/author/carson-zhang.html">Carson Zhang</a><br>
+        </div>
+        -->
+
+        <p>A lot of times we use matplotlib to plot images and we would like to display them on a 
+HTML page simply for rendering as PDF for download or just for display.</p>
+<p>Fortunately this is possible for django backend, here is an example for plotting a 
+horizontal barchart in HTML.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib.figure</span> <span class="kn">import</span> <span class="n">Figure</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+
+<span class="k">class</span> <span class="nc">HorizontalBarChart</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Plots a horizontal barchat for displaying in html&quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_set_annotation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">max_bar_width</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Annotate the value of each bar in the barchart&quot;&quot;&quot;</span>
+
+        <span class="c1"># Rectangle widths are already integer-valued but are floating</span>
+        <span class="c1"># type, so it helps to remove the trailing decimal point and 0 by</span>
+        <span class="c1"># converting width to int type</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span>
+
+        <span class="n">annotation_inside_bar_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>  <span class="c1"># Horizontal align</span>
+        <span class="p">)</span>
+
+        <span class="n">annotation_to_right_of_bar_params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span>  <span class="c1"># Horizontal align</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">max_bar_width</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Empty plot, default annotation to the right of bar</span>
+            <span class="n">annotation_params</span> <span class="o">=</span> <span class="n">annotation_to_right_of_bar_params</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># We default all annotations inside the bar</span>
+            <span class="n">annotation_params</span> <span class="o">=</span> <span class="n">annotation_inside_bar_params</span>
+
+            <span class="n">current_bar_width_percentage</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total</span> <span class="o">/</span> <span class="n">max_bar_width</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">current_bar_width_percentage</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="c1"># current bar size is smaller than 10% of the longest bar, means that</span>
+                <span class="c1"># it may not be wide enough to print its value inside</span>
+                <span class="n">annotation_params</span> <span class="o">=</span> <span class="n">annotation_to_right_of_bar_params</span>
+
+        <span class="n">yloc</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="n">total</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">yloc</span><span class="p">),</span>
+            <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+            <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+            <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+            <span class="n">clip_on</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">annotation_params</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_to_data_url</span><span class="p">(</span><span class="n">fig</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a data url for matplotlib Figure for embed in html</span>
+
+<span class="sd">        How to use it:</span>
+<span class="sd">        In python:</span>
+<span class="sd">            chart = HorizontalBarChart()._to_data_url(data)</span>
+<span class="sd">        In html:</span>
+<span class="sd">            &lt;img src=&quot;{{ chart }}&quot;&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>  <span class="c1"># Save it to a temporary buffer.</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;data:image/png;base64,{data}&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_image_url</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">with_annotation</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Generate a barplot for given data</span>
+
+<span class="sd">        :param dict[int] data: input data to plot</span>
+<span class="sd">        :param str title: title for the chart</span>
+<span class="sd">        :param bool with_annotation:</span>
+<span class="sd">            if set, annotate the value of each bar in the chart so its easier to see</span>
+<span class="sd">            defaults to False</span>
+
+<span class="sd">        :return str: data url of the generated barchart, easy to render in html</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="c1"># Create a Figure constructor so it saves to in-memory buffers</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+        <span class="c1"># Set temporary plot themes for each plot</span>
+        <span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">plotting_context</span><span class="p">(</span><span class="s2">&quot;talk&quot;</span><span class="p">):</span>  <span class="c1"># Bigger fonts</span>
+            <span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">):</span>  <span class="c1"># White grid background</span>
+                <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+                <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2b7bba&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span> <span class="c1"># Mono color for bars</span>
+
+                <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+                    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="c1"># Make sure we use integer for axis</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="n">integer</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">with_annotation</span><span class="p">:</span>
+            <span class="n">max_bar_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">rect</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="k">for</span> <span class="n">rect</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">])</span>
+
+            <span class="c1"># Annotation the value of each bar for a better presentation</span>
+            <span class="k">for</span> <span class="n">rect</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">_set_annotation</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="n">max_bar_width</span><span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">set_tight_layout</span><span class="p">(</span><span class="n">tight</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>  <span class="c1"># less white margines</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_to_data_url</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Here is the html template code:</p>
+<div class="highlight"><pre><span></span>  <span class="p">&lt;</span><span class="nt">picture</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ risks_by_category_chart }}&quot;</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;width: 100%;&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">picture</span><span class="p">&gt;</span>
+</pre></div>
+
+
+<p>The key implementations here:</p>
+<ul>
+<li>Save the image into <code>base64</code> io stream so its in the memory buffer instead of on disk</li>
+<li>Use the <code>Figure</code> object in Matplotlib so its thread safe</li>
+<li>I've also implemented an auto annotate function</li>
+</ul>
+<p>Reference:</p>
+<ul>
+<li><a href="https://matplotlib.org/2.0.0/examples/pylab_examples/barchart_demo2.html">Matplotlib Barchart demo 2</a></li>
+<li><a href="https://matplotlib.org/faq/howto_faq.html#how-to-use-matplotlib-in-a-web-application-server">How to use Matplotlib in a web application server</a></li>
+</ul>
+    </div>
+
+    <footer>
+        <div class="tags">
+            <a href="/tag/matplotlib.html">Matplotlib</a>
+            <a href="/tag/django.html">Django</a>
+            <a href="/tag/web-development.html">Web development</a>
+            <a href="/tag/pdf.html">PDF</a>
+        </div>
+        <div class="pure-g post-footer">
+            <div class="pure-g">
+                <div class="pure-g poster-info">
+                    <div class="pure-u">
+                        <a href="/author/carson-zhang.html"><img src="../theme/images/authors/Logo.png" alt=""></a>
+                    </div>
+                    <div class="pure-u">
+                        <h3 class="author-name"><a href="/author/carson-zhang.html">Carson Zhang</a></h3>
+                        <p class="author-description">
+                          
+            I'm a senior software developer, passionated with artificial intellgence and
+            web development.
+        
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--
+            -->
+
+        </div>
+
+
+    </footer>
+
+
+</div>
+
+
+  <footer class="index-footer">
+    <div class="footer-wide">
+      <p><a href="">Carson's Tech Hut</a>&copy; Carson Zhang 2020</p>
+    </div>
+    <div class="footer-narrow">
+      <p><a href="">Carson's Tech Hut</a><br>
+      &copy; Carson Zhang 2020</p>
+    </div>
+  </footer>
+
+
+  <link rel="stylesheet" href="../theme/css/pure-min.css" />
+  <link rel="stylesheet" href="../theme/css/grids-responsive-min.css" />
+  <link rel="stylesheet" href="../theme/fontawesome-free-5.13.0-web/css/all.min.css" />
+  <link rel="stylesheet" href="/theme/css/main.css" />
+</body>
+
+
+</html>
