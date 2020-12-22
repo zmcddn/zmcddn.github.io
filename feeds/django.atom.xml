@@ -136,7 +136,7 @@ horizontal barchart in HTML.&lt;/p&gt;
 &lt;li&gt;Use the &lt;code&gt;Figure&lt;/code&gt; object in Matplotlib so its thread safe&lt;/li&gt;
 &lt;li&gt;I've also implemented an auto annotate function&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Reference:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://matplotlib.org/2.0.0/examples/pylab_examples/barchart_demo2.html"&gt;Matplotlib Barchart demo 2&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://matplotlib.org/faq/howto_faq.html#how-to-use-matplotlib-in-a-web-application-server"&gt;How to use Matplotlib in a web application server&lt;/a&gt;&lt;/li&gt;

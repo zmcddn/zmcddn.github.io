@@ -229,7 +229,7 @@ div.post-meta div.meta-data a.author:hover{color:#57ad68}
 
 div.page-container{text-align:center;margin-top:80px}
 div.page-container div.entry-content{
-    max-width:850px;
+    max-width:800px;
     margin:0 auto;
     text-align:left;
     font-family:"Charter",serif;
@@ -247,7 +247,7 @@ div.page-container div.entry-content h1{
 @media screen and (min-width: 35.5em) {
 div.page-container div.entry-content{line-height:1.58}
 }
-div.page-container footer{margin:0 auto;text-align:left;max-width:850px}
+div.page-container footer{margin:0 auto;text-align:left;max-width:800px}
 div.page-container footer div.post-footer{padding:20px;border-top:1px solid rgba(0,0,0,0.1);border-bottom:1px solid rgba(0,0,0,0.1);margin:30px 0 40px}
 @media screen and (min-width: 48em) {
 div.page-container footer div.post-footer{padding:40px 0}
@@ -333,7 +333,7 @@ div.article-header-container div.background-image-container div.background-image
     margin-left:0;
     text-align:left}
 @media screen and (min-width: 48em) {
-div.article-header-container div.background-image-container div.background-image-small div.title-container{width:850px;margin:0 auto}
+div.article-header-container div.background-image-container div.background-image-small div.title-container{width:800px;margin:0 auto}
 }
 div.article-header-container div.background-image-container div.background-image-small div.title-container h1{font-size:32px;line-height:1.2;margin:0 0 10px;padding-top:20px}
 @media screen and (min-width: 35.5em) {
