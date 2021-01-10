@@ -1,5 +1,2742 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - Tutorial</title><link href="/" rel="alternate"></link><link href="/feeds/tutorial.atom.xml" rel="self"></link><id>/</id><updated>2020-04-12T00:00:00-06:00</updated><entry><title>How to setup Github Blog via Pelican</title><link href="/how-to-setup-github-blog-via-pelican.html" rel="alternate"></link><published>2020-04-12T00:00:00-06:00</published><updated>2020-04-12T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2020-04-12:/how-to-setup-github-blog-via-pelican.html</id><summary type="html">&lt;p&gt;There are many ways to setup a Github blog, but since I love Python I think it makes sense to use Pelican, which is a Static Site Generator, Powered by Python. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Carson's Tech Hut - Tutorial</title><link href="/" rel="alternate"></link><link href="/feeds/tutorial.atom.xml" rel="self"></link><id>/</id><updated>2020-12-18T20:00:00-07:00</updated><entry><title>How to migrate GitHub issues to Jira</title><link href="/how-to-migrate-github-issues-to-jira.html" rel="alternate"></link><published>2020-12-18T20:00:00-07:00</published><updated>2020-12-18T20:00:00-07:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2020-12-18:/how-to-migrate-github-issues-to-jira.html</id><summary type="html">&lt;p&gt;A tutorial shows you how to write a script to migrate GitHub issues to Jira.&lt;/p&gt;</summary><content type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="How-to-migrate-GitHub-issues-to-Jira"&gt;How to migrate GitHub issues to Jira&lt;a class="anchor-link" href="#How-to-migrate-GitHub-issues-to-Jira"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;&lt;p&gt;When your team grows and github project is not sufficient enough to manage your team and all the tickets, its time to migrate to other more comprehensive platform for project management. And Jira could be one of the choices.&lt;/p&gt;
+&lt;p&gt;Most of time you have to write a script to migrate them, otherwise manually moving hundreds or even thousands of tickets could take a long time!&lt;/p&gt;
+&lt;p&gt;However, the GitHub API and Jira developer docs are not really clear. By the time of this article, GitHub just updated their API and at the top of pretty much all of their documentations say that the content may not be up-to-date, whereas Jira just updated their api to only take in Jira's internal account id instead of username (and email) when targeting any users due to the GDPR compliance.&lt;/p&gt;
+&lt;p&gt;Therefore, to migrate from GitHub to Jira became try and error and research, and I couldn't find some really good articles/tutorials to do so.&lt;/p&gt;
+&lt;p&gt;Thus I come up with this article (tutorial) to demonstrate how to implement such script.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Disclaimer"&gt;Disclaimer&lt;a class="anchor-link" href="#Disclaimer"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This tutorial illustrates an implementation for migrating GitHub issues to Jira, but doesn't guarantee the completeness and robustness of the code.&lt;/p&gt;
+&lt;p&gt;There might be missing consideration for certain edge cases, and it is your responsibility to make sure your code is production  ready.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="GitHub-API-Authentication"&gt;GitHub API Authentication&lt;a class="anchor-link" href="#GitHub-API-Authentication"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="URL-components"&gt;URL components&lt;a class="anchor-link" href="#URL-components"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;When talking with GitHub API for repo, you should always specify &lt;strong&gt;owner&lt;/strong&gt; and &lt;strong&gt;repo&lt;/strong&gt;, this is normally specified in the url for any project.&lt;/p&gt;
+&lt;p&gt;For example, consider the new async python backend framework &lt;a href="https://github.com/tiangolo/fastapi"&gt;FastAPI&lt;/a&gt;, for an arbitrary issue url &lt;code&gt;https://github.com/tiangolo/fastapi/issues/2562&lt;/code&gt;, the &lt;strong&gt;owner is tiangolo&lt;/strong&gt; and &lt;strong&gt;repo is fastapi&lt;/strong&gt;. This also applies for private organizations and repos.&lt;/p&gt;
+&lt;p&gt;More discussions can be found &lt;a href="https://stackoverflow.com/questions/9755257/list-all-issues-from-an-organizations-private-repo-using-github-api-v3"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="Authentication"&gt;Authentication&lt;a class="anchor-link" href="#Authentication"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Although you can access open source repos, you should create a Personal Access Token (PAT) to access any repo (its required for private repos anyway).&lt;/p&gt;
+&lt;p&gt;For details about how to generate PAT, you can check this &lt;a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token"&gt;&lt;strong&gt;link&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[32]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# In this article I&amp;#39;ll use the FastAPI repo as an example&lt;/span&gt;
+&lt;span class="c1"&gt;# Since its an open source project, we don&amp;#39;t need to use the username and PAT here&lt;/span&gt;
+&lt;span class="c1"&gt;# so I&amp;#39;ll comment out all the authentication part in the code but still show them&lt;/span&gt;
+
+&lt;span class="n"&gt;USERNAME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;your github username&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;PAT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Your generated PAT&amp;quot;&lt;/span&gt;
+
+&lt;span class="n"&gt;GITHUB_OWNER&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;tiangolo&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;GITHUB_REPO&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;fastapi&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Get-GitHub-issues"&gt;Get GitHub issues&lt;a class="anchor-link" href="#Get-GitHub-issues"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;First of all checkout the &lt;a href="https://docs.github.com/en/free-pro-team@latest/rest/reference/issues#list-repository-issues"&gt;&lt;strong&gt;GitHub doc for retrieving issues&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The code is quite simple, lets first consider get an issue by the issue number.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[33]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Import some libs for use in the script&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;requests.auth&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;HTTPBasicAuth&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pprint&lt;/span&gt; &lt;span class="k"&gt;import&lt;/span&gt; &lt;span class="n"&gt;pprint&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[34]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_single_issue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue_number&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Get specific issue data&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://api.github.com/repos/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_OWNER}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_REPO}&lt;/span&gt;&lt;span class="s2"&gt;/issues/&lt;/span&gt;&lt;span class="si"&gt;{issue_number}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="c1"&gt;# auth=(USERNAME, PAT)  # this is how you use the username and PAT&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_single_issue&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2562&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;pprint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;{&amp;#39;active_lock_reason&amp;#39;: None,
+ &amp;#39;assignee&amp;#39;: None,
+ &amp;#39;assignees&amp;#39;: [],
+ &amp;#39;author_association&amp;#39;: &amp;#39;NONE&amp;#39;,
+ &amp;#39;body&amp;#39;: &amp;#39;\r\n&amp;#39;
+         &amp;#39;### Support for concurrent Panda Dataframe GET access\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;Does FastAPI support concurrent Dataframe read/GET access to various &amp;#39;
+         &amp;#39;different columns for validation checks, where I am not expecting  &amp;#39;
+         &amp;#39;any dependencies between the columns.\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;i.e after df is created, instead of sequentially calling \r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;check_for_NA\r\n&amp;#39;
+         &amp;#39;check_account_types\r\n&amp;#39;
+         &amp;#39;check_duplicates\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;how to async trigger these above and collect results are ready and &amp;#39;
+         &amp;#39;perform a AND function\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;![Screenshot 2020-12-23 at 02 03 &amp;#39;
+         &amp;#39;20](https://user-images.githubusercontent.com/1273014/102950701-0cdc2e80-44c3-11eb-98f9-3582b9eff136.png)\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;### Environment\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39;* OS: macOS: 11.1 Big Sur\r\n&amp;#39;
+         &amp;#39;* FastAPI Version fastapi    0.63.0:\r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39; (.venv) pyth3 --version\r\n&amp;#39;
+         &amp;#39;Python 3.9.1 \r\n&amp;#39;
+         &amp;#39;\r\n&amp;#39;
+         &amp;#39; &amp;#39;,
+ &amp;#39;closed_at&amp;#39;: None,
+ &amp;#39;closed_by&amp;#39;: None,
+ &amp;#39;comments&amp;#39;: 5,
+ &amp;#39;comments_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562/comments&amp;#39;,
+ &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-22T23:58:04Z&amp;#39;,
+ &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562/events&amp;#39;,
+ &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562&amp;#39;,
+ &amp;#39;id&amp;#39;: 773323253,
+ &amp;#39;labels&amp;#39;: [{&amp;#39;color&amp;#39;: &amp;#39;d876e3&amp;#39;,
+             &amp;#39;default&amp;#39;: True,
+             &amp;#39;description&amp;#39;: &amp;#39;Further information is requested&amp;#39;,
+             &amp;#39;id&amp;#39;: 1154536363,
+             &amp;#39;name&amp;#39;: &amp;#39;question&amp;#39;,
+             &amp;#39;node_id&amp;#39;: &amp;#39;MDU6TGFiZWwxMTU0NTM2MzYz&amp;#39;,
+             &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/labels/question&amp;#39;}],
+ &amp;#39;labels_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562/labels{/name}&amp;#39;,
+ &amp;#39;locked&amp;#39;: False,
+ &amp;#39;milestone&amp;#39;: None,
+ &amp;#39;node_id&amp;#39;: &amp;#39;MDU6SXNzdWU3NzMzMjMyNTM=&amp;#39;,
+ &amp;#39;number&amp;#39;: 2562,
+ &amp;#39;performed_via_github_app&amp;#39;: None,
+ &amp;#39;repository_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi&amp;#39;,
+ &amp;#39;state&amp;#39;: &amp;#39;open&amp;#39;,
+ &amp;#39;title&amp;#39;: &amp;#39;[QUESTION] Support for concurrent dataframe operations with async &amp;#39;
+          &amp;#39;await&amp;#39;,
+ &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+ &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+ &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+          &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+          &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+          &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+          &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+          &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+          &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+          &amp;#39;id&amp;#39;: 1273014,
+          &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+          &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+          &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+          &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+          &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+          &amp;#39;site_admin&amp;#39;: False,
+          &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+          &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+          &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+          &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;}}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;As you can see above we have retrieved all the details about this issue.&lt;/p&gt;
+&lt;p&gt;But what if we want to get all the issues?&lt;/p&gt;
+&lt;p&gt;From the GitHub doc we can see that there is a pagination, and the default pagination is 30 items and the max pagination is 100 items per page.&lt;/p&gt;
+&lt;p&gt;One thing to &lt;strong&gt;NOTE&lt;/strong&gt; is that GitHub consider PRs to be issues too, so if you would like to just get all the issues excluding all the PRs you have to specifiy it.&lt;/p&gt;
+&lt;p&gt;Here is how we do it:&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[35]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_all_issues&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;  &lt;span class="c1"&gt;# pagination size needs to be set properly&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Traversing with Pagination to get all issues&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://api.github.com/repos/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_OWNER}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_REPO}&lt;/span&gt;&lt;span class="s2"&gt;/issues&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;per_page&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;  &lt;span class="c1"&gt;# max 100 results per page starting from first page&lt;/span&gt;
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="c1"&gt;# auth=(USERNAME, PAT), &lt;/span&gt;
+        &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    
+    &lt;span class="c1"&gt;# Get all the issues excluding the PRs&lt;/span&gt;
+    &lt;span class="c1"&gt;# NOTE that if the &amp;quot;pull_request&amp;quot; is not set for an issue then it is not a PR&lt;/span&gt;
+    &lt;span class="n"&gt;issues&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pull_request&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;next&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;links&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;links&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;next&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+&lt;span class="c1"&gt;#             auth=(USERNAME, PAT),&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;issues&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extend&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pull_request&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;issues&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_all_issues&lt;/span&gt;&lt;span class="p"&gt;()))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;395
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;At the time of writing there are 395 issues, and our logic above is correct.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Get-all-labels"&gt;Get all labels&lt;a class="anchor-link" href="#Get-all-labels"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;On some occations when we are doing migration, we don't really want to migrate all of the issues, and we would like to target specific issues, hence we need a way to get all issues from a particular labels.&lt;/p&gt;
+&lt;p&gt;We could get all of the labels first.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[36]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_all_labels&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="c1"&gt;# Get all issue labels&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://api.github.com/repos/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_OWNER}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_REPO}&lt;/span&gt;&lt;span class="s2"&gt;/labels&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="c1"&gt;# headers={&amp;#39;Authorization&amp;#39;: PAT}&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;labels&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_all_labels&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[37]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Lets see the details for 1 label&lt;/span&gt;
+&lt;span class="n"&gt;pprint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;{&amp;#39;color&amp;#39;: &amp;#39;f6f6f6&amp;#39;,
+ &amp;#39;default&amp;#39;: False,
+ &amp;#39;description&amp;#39;: &amp;#39;&amp;#39;,
+ &amp;#39;id&amp;#39;: 2109805297,
+ &amp;#39;name&amp;#39;: &amp;#39;answered&amp;#39;,
+ &amp;#39;node_id&amp;#39;: &amp;#39;MDU6TGFiZWwyMTA5ODA1Mjk3&amp;#39;,
+ &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/labels/answered&amp;#39;}
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[38]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Lets see all the label names&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[&amp;#39;answered&amp;#39;, &amp;#39;approved-2&amp;#39;, &amp;#39;awaiting review&amp;#39;, &amp;#39;bug&amp;#39;, &amp;#39;community-feedback&amp;#39;, &amp;#39;confirmed&amp;#39;, &amp;#39;docs&amp;#39;, &amp;#39;duplicate&amp;#39;, &amp;#39;enhancement&amp;#39;, &amp;#39;good first issue&amp;#39;, &amp;#39;hacktoberfest-accepted&amp;#39;, &amp;#39;help wanted&amp;#39;, &amp;#39;invalid&amp;#39;, &amp;#39;lang-all&amp;#39;, &amp;#39;lang-de&amp;#39;, &amp;#39;lang-es&amp;#39;, &amp;#39;lang-fa&amp;#39;, &amp;#39;lang-fr&amp;#39;, &amp;#39;lang-it&amp;#39;, &amp;#39;lang-ja&amp;#39;, &amp;#39;lang-ko&amp;#39;, &amp;#39;lang-pt&amp;#39;, &amp;#39;lang-ru&amp;#39;, &amp;#39;lang-sq&amp;#39;, &amp;#39;lang-tr&amp;#39;, &amp;#39;lang-uk&amp;#39;, &amp;#39;lang-zh&amp;#39;, &amp;#39;question&amp;#39;, &amp;#39;wontfix&amp;#39;]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Get-issues-by-label"&gt;Get issues by label&lt;a class="anchor-link" href="#Get-issues-by-label"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;If we know what lables we need to export, that could make the entire process much easier.&lt;/p&gt;
+&lt;p&gt;This is similar to get all tickets, which means it paginated. However, there is a gotcha:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ATTENTION&lt;/strong&gt;: you can't do &lt;strong&gt;&lt;em&gt;OR&lt;/em&gt;&lt;/strong&gt; for labels. Suppose you have label "name" and "age", then the returned result is &lt;em&gt;AND&lt;/em&gt; not &lt;em&gt;OR&lt;/em&gt;. Its been requested to GitHub FOUR years ago but still haven't been addressed. Details can be found &lt;a href="https://github.com/isaacs/github/issues/660"&gt;in this link&lt;/a&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[39]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_all_issues_by_label&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;  &lt;span class="c1"&gt;# pagination size needs to be set properly&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;  &lt;span class="c1"&gt;# Labels cannot be None&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Get issues by labels&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://api.github.com/repos/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_OWNER}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_REPO}&lt;/span&gt;&lt;span class="s2"&gt;/issues&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;labels&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;per_page&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;pagination&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;page&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+        &lt;span class="c1"&gt;# auth=(USERNAME, PAT), &lt;/span&gt;
+        &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# PRs are considered as issues too so we should filter them out&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pull_request&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+&lt;span class="n"&gt;issues&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_all_issues_by_label&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;answered&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;issue_numbers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;issues&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue_numbers&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;29
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[40]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# As mentioned above the filter by label in GitHub is AND, so if &lt;/span&gt;
+&lt;span class="c1"&gt;# we want to do OR we have to loop them&lt;/span&gt;
+&lt;span class="n"&gt;issues&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;label&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;answered&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bug&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;issues&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;get_all_issues_by_label&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issues&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;57
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Get-comments"&gt;Get comments&lt;a class="anchor-link" href="#Get-comments"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now we know how to get issues, the next step is to figure out how to get all the comments.&lt;/p&gt;
+&lt;p&gt;It will return a detailed list of each comment&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[41]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Since the comment url is in the issue&amp;#39;s data, we can just use it to fetch the comments for the issue&lt;/span&gt;
+&lt;span class="n"&gt;comment_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;comments_url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;comment_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;comment_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="c1"&gt;#     auth=(USERNAME, PAT)&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="n"&gt;pprint&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;comment_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;[{&amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#39;Firstly, Fastapi does not have any integration with pandas.\n&amp;#39;
+          &amp;#39;\n&amp;#39;
+          &amp;#39;To answer your question though, you could run those operations in a &amp;#39;
+          &amp;#39;thread pool, and perform the AND once they all complete? I would be &amp;#39;
+          &amp;#39;surprised if this actually improved performance though&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T03:06:37Z&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-749900439&amp;#39;,
+  &amp;#39;id&amp;#39;: 749900439,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc0OTkwMDQzOQ==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-23T03:06:37Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/749900439&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+           &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+           &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+           &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+           &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+           &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+           &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+           &amp;#39;id&amp;#39;: 1405026,
+           &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+           &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+           &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+           &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+           &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+           &amp;#39;site_admin&amp;#39;: False,
+           &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+           &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+           &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+           &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;}},
+ {&amp;#39;author_association&amp;#39;: &amp;#39;NONE&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#39;@Mause thanks I know there is no integration with Pandas, but based &amp;#39;
+          &amp;#34;on the async await nature that FastApi handles I thought I&amp;#39;d ask to &amp;#34;
+          &amp;#39;see if there are benefits, if so how to approach it.&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T03:19:02Z&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-749904268&amp;#39;,
+  &amp;#39;id&amp;#39;: 749904268,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc0OTkwNDI2OA==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-23T03:19:33Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/749904268&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+           &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+           &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+           &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+           &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+           &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+           &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+           &amp;#39;id&amp;#39;: 1273014,
+           &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+           &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+           &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+           &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+           &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+           &amp;#39;site_admin&amp;#39;: False,
+           &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+           &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+           &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+           &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;}},
+ {&amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#34;Pandas doesn&amp;#39;t have async support, so your only option here is to &amp;#34;
+          &amp;#34;use threads, though as I said, it&amp;#39;s not guaranteed that this will &amp;#34;
+          &amp;#39;give a performance improvement&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T04:36:54Z&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-749927183&amp;#39;,
+  &amp;#39;id&amp;#39;: 749927183,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc0OTkyNzE4Mw==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-23T04:36:54Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/749927183&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+           &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+           &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+           &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+           &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+           &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+           &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+           &amp;#39;id&amp;#39;: 1405026,
+           &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+           &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+           &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+           &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+           &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+           &amp;#39;site_admin&amp;#39;: False,
+           &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+           &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+           &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+           &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;}},
+ {&amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#34;This is not related in any way to fastapi, but it&amp;#39;s an interesting &amp;#34;
+          &amp;#39;question. I would encourage you to post this question on a site &amp;#39;
+          &amp;#39;like StackOverflow&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-24T14:35:05Z&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-750899328&amp;#39;,
+  &amp;#39;id&amp;#39;: 750899328,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc1MDg5OTMyOA==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-24T14:35:05Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/750899328&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/47581948?v=4&amp;#39;,
+           &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/events{/privacy}&amp;#39;,
+           &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/followers&amp;#39;,
+           &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/following{/other_user}&amp;#39;,
+           &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/gists{/gist_id}&amp;#39;,
+           &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+           &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/hellocoldworld&amp;#39;,
+           &amp;#39;id&amp;#39;: 47581948,
+           &amp;#39;login&amp;#39;: &amp;#39;hellocoldworld&amp;#39;,
+           &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjQ3NTgxOTQ4&amp;#39;,
+           &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/orgs&amp;#39;,
+           &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/received_events&amp;#39;,
+           &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/repos&amp;#39;,
+           &amp;#39;site_admin&amp;#39;: False,
+           &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/starred{/owner}{/repo}&amp;#39;,
+           &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/subscriptions&amp;#39;,
+           &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+           &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld&amp;#39;}},
+ {&amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#39;@scheung38 if you agree with the answers , could you close the &amp;#39;
+          &amp;#39;issue , thank you&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-752786189&amp;#39;,
+  &amp;#39;id&amp;#39;: 752786189,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc1Mjc4NjE4OQ==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/752786189&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/10202690?v=4&amp;#39;,
+           &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/events{/privacy}&amp;#39;,
+           &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/followers&amp;#39;,
+           &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/following{/other_user}&amp;#39;,
+           &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/gists{/gist_id}&amp;#39;,
+           &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+           &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/raphaelauv&amp;#39;,
+           &amp;#39;id&amp;#39;: 10202690,
+           &amp;#39;login&amp;#39;: &amp;#39;raphaelauv&amp;#39;,
+           &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEwMjAyNjkw&amp;#39;,
+           &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/orgs&amp;#39;,
+           &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/received_events&amp;#39;,
+           &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/repos&amp;#39;,
+           &amp;#39;site_admin&amp;#39;: False,
+           &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/starred{/owner}{/repo}&amp;#39;,
+           &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/subscriptions&amp;#39;,
+           &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+           &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv&amp;#39;}}]
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="What-format-does-Jira-accept-for-import?"&gt;What format does Jira accept for import?&lt;a class="anchor-link" href="#What-format-does-Jira-accept-for-import?"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now that we have enough information from GitHub, lets take a look at Jira.&lt;/p&gt;
+&lt;p&gt;After some research, I found that Jira accepts both &lt;strong&gt;&lt;em&gt;CSV&lt;/em&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;JSON&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;However, there are two entrance points:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;On any of the Jira project board, there is a big green "Create" button at the top center position of the page, but its used for importing a &lt;strong&gt;single issue&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;For &lt;strong&gt;bulk import&lt;/strong&gt;, we &lt;a href="https://confluence.atlassian.com/adminjiraserver/importing-data-from-github-938847543.html"&gt;follow this link&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Here we choose to use the CSV format for importing (JSON works the same), and &lt;a href="https://confluence.atlassian.com/adminjiraserver/importing-data-from-csv-938847533.html"&gt;here the documentation for importing data from CSV&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most of the field mapping is pretty straightforad, but the following can be super tricky:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Jira project&lt;/li&gt;
+&lt;li&gt;Jira users (assignee, commenter, etc)&lt;/li&gt;
+&lt;li&gt;Jira datetime format&lt;/li&gt;
+&lt;li&gt;Inline images&lt;/li&gt;
+&lt;li&gt;Labels&lt;/li&gt;
+&lt;li&gt;Comments&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Jira-project"&gt;Jira project&lt;a class="anchor-link" href="#Jira-project"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There are basically &lt;strong&gt;THREE&lt;/strong&gt; project fields needed for auto-mapping with projects:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;project&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;project_type&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;project_key&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These fields are well defined for any Jira project, you can find them in your Jira project settings&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[42]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# We could initialize Jira mapping as follows&lt;/span&gt;
+&lt;span class="n"&gt;FIELDS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="c1"&gt;# Project&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;project&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Project&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;project_type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Project Type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;project_key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Project Key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+&lt;span class="c1"&gt;#     # Once issue_key is specified, its targeted for that specific issue&lt;/span&gt;
+&lt;span class="c1"&gt;#     # any further operations will be an update, so I just use it for testing&lt;/span&gt;
+&lt;span class="c1"&gt;#     {&amp;#39;key&amp;#39;: &amp;#39;issue_key&amp;#39;, &amp;#39;label&amp;#39;: &amp;#39;Issue Key&amp;#39;},  # Optional&lt;/span&gt;
+    &lt;span class="c1"&gt;# Issue&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Summary&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;body&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Description&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;assignee&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Assignee&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;user&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Reporter&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;  &lt;span class="c1"&gt;# Issue creater&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;created_at&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Date Created&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;updated_at&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Date Modified&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;labels&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Labels&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;  &lt;span class="c1"&gt;# each label separated by space&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Jira-users"&gt;Jira users&lt;a class="anchor-link" href="#Jira-users"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href="https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/"&gt;&lt;strong&gt;&lt;em&gt;By 29 April 2019, Jira will remove personal data from the API that is used to identify users, such as username and userKey, and instead use the Atlassian account ID (accountId).&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So a lot of online resources have the solution to use &lt;code&gt;username&lt;/code&gt;, &lt;code&gt;userKey&lt;/code&gt;, or &lt;code&gt;userEmail&lt;/code&gt; for Jira users, but they probably won't work for now (or not stable).&lt;/p&gt;
+&lt;p&gt;Therefore we have to &lt;a href="https://support.atlassian.com/jira-software-cloud/docs/convert-usernames-to-user-account-i-ds/"&gt;Convert usernames to user account IDs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To get a list of Jira account ids, we have to first generate an API token to talk to Jira. You can &lt;a href="https://confluence.atlassian.com/cloud/api-tokens-938839638.html"&gt;read this documentation&lt;/a&gt; to create a token.&lt;/p&gt;
+&lt;p&gt;Once you've created the token, you can &lt;a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-users/#api-group-users"&gt;follow this documention to get user data&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Most of time we have user emails that we can map, but in Jira you can't see user emails unless you &lt;a href="https://community.developer.atlassian.com/t/guidelines-for-requesting-access-to-email-address/27603"&gt;follow instructions from this article&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I found that requesting the email access in Jira could require work from other department, so I worked around a little.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[43]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Suppose we have a map of github login name and user email like follows&lt;/span&gt;
+&lt;span class="n"&gt;GITHUB_LOGIN_ID_EMAIL_MAP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;your-github-login-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;your-github-login-EMAIL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;JIRA_API_TOKEN&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;your generated jira api token&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;JIRA_LOGIN_EMAIL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;your jira login email&amp;quot;&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_jira_account_ids_with_display_name&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://your-company-jira-url/rest/api/3/users/search&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;auth&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;HTTPBasicAuth&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;JIRA_LOGIN_EMAIL&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;JIRA_API_TOKEN&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Accept&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;application/json&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;auth&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;auth&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;users&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;email_username_github_login_id_map&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;@&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;GITHUB_LOGIN_ID_EMAIL_MAP&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;()}&lt;/span&gt;
+
+    &lt;span class="n"&gt;not_mapped_uses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Mapped users:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;users&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{email_username_github_login_id_map[user[&amp;#39;displayName&amp;#39;].split(&amp;#39; &amp;#39;)[0].lower()]} -&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;{user[&amp;#39;accountId&amp;#39;]}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;KeyError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;not_mapped_uses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;displayName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;accountId&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]})&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;not_mapped_uses&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Not mapped users:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;not_mapped_uses&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{k}&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;{v}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The idea above is that most of time the company emial follows a pattern of using employee's name.&lt;/p&gt;
+&lt;p&gt;In the example here its the employee's first name.&lt;/p&gt;
+&lt;p&gt;And the Jira display name is often the first name as well.&lt;/p&gt;
+&lt;p&gt;So given a list of emails, we can extract the user name automatically and get the jira account id.&lt;/p&gt;
+&lt;p&gt;But this won't work if the email or Jira display name doesn't follow the pattern, for that case you could adjust the logic, or manually map them.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[44]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# Using above function, we can maually create a map of GitHub login ID and &lt;/span&gt;
+&lt;span class="c1"&gt;# Jira account id map similar to follows&lt;/span&gt;
+&lt;span class="n"&gt;GITHUB_LOGIN_ID_JIRA_ACCOUNT_ID_MAP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;your-github-login-name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;your mapped jira account id&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="c1"&gt;# THEN we can write a function to get the jira account id given github login id&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_jira_account_id_from_github_login_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;github_user_data&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;github_user_data&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;github_account&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;github_user_data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;GITHUB_LOGIN_ID_JIRA_ACCOUNT_ID_MAP&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;github_account&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;GITHUB_LOGIN_ID_JIRA_ACCOUNT_ID_MAP&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;github_account&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Github account &amp;lt;&lt;/span&gt;&lt;span class="si"&gt;{github_account}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt; not in the map&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Jira-datetime-format"&gt;Jira datetime format&lt;a class="anchor-link" href="#Jira-datetime-format"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Jira suports all standard datetime format, but you'll have to make sure the format you use is &lt;strong&gt;&lt;em&gt;consistent&lt;/em&gt;&lt;/strong&gt; everywhere (all datetime variables, jira comments, etc)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Jira-Inline-images"&gt;Jira Inline images&lt;a class="anchor-link" href="#Jira-Inline-images"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Not like other platform where they use Markdown format, Jira somehow uses a format called &lt;strong&gt;&lt;em&gt;Wiki Format&lt;/em&gt;&lt;/strong&gt; (i.e. they use &lt;code&gt;!&lt;/code&gt; to wrap around the image url), which means all the inline images won't be displayed correctly, so we have to transform all the markdown format to the wiki format in order for them to display correctly in Jira.&lt;/p&gt;
+&lt;p&gt;Also, sometimes you can use html format inline images as well, so we also need to parse the html ones.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[45]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;transfer_markdown_image_to_wiki_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Convert mardown foramt image link to wiki format image link&lt;/span&gt;
+
+&lt;span class="sd"&gt;    https://community.atlassian.com/t5/Jira-questions/How-to-config-JIRA-display-inline-image-attach-image-in-BEST-FIT/qaq-p/701224&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;![&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;replace_markdown_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;group&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="n"&gt;img_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;(http[s]?://[^)]+)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;{img_link}&lt;/span&gt;&lt;span class="s2"&gt;|width=100%!&amp;quot;&lt;/span&gt;
+
+        &lt;span class="n"&gt;markdown_img_pattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\[([^\]]+)\]\(([^)]+)\)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;S&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;markdown_img_pattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;replace_markdown_link&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;
+
+&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;This is our inline image from github &amp;quot;&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;![some image](https://user-images.githubusercontent.com/some_id/image_name.png)&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Original string:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Transformed string:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transfer_markdown_image_to_wiki_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Original string: This is our inline image from github ![some image](https://user-images.githubusercontent.com/some_id/image_name.png)
+
+Transformed string: This is our inline image from github !https://user-images.githubusercontent.com/some_id/image_name.png|width=100%!
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;In addition, sometimes you can use html format inline images as well, so we also need to parse the html ones.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[46]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;transfer_html_image_to_wiki_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Convert html img tag to wiki format image link&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Since the default github link follows below pattern:&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;lt;img width=&amp;quot;1439&amp;quot; alt=&amp;quot;Screen Shot 2020-12-07 at 11 13 50 AM&amp;quot; src=&amp;quot;https://user-images.githubusercontent.com/some_id/image_name.png&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class="sd"&gt;    we can simply use regex to match it&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;lt;img&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;replace_img_tag&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;group&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="n"&gt;img_link&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;(https://user-images.githubusercontent.com.*?.png)&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;!&lt;/span&gt;&lt;span class="si"&gt;{img_link}&lt;/span&gt;&lt;span class="s2"&gt;|width=100%!&amp;quot;&lt;/span&gt;
+
+        &lt;span class="n"&gt;img_tag_pattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;(&amp;lt;img.*?&amp;gt;)&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;S&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;img_tag_pattern&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;replace_img_tag&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;
+
+&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;This is our inline image from github &amp;quot;&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;&amp;lt;img width=&amp;quot;1439&amp;quot; alt=&amp;quot;Screen Shot 2020-12-07 at 11 13 50 AM&amp;quot; src=&amp;quot;https://user-images.githubusercontent.com/some_id/image_name.png&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Original string:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Transformed string:&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;transfer_html_image_to_wiki_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;Original string: This is our inline image from github &amp;lt;img width=&amp;#34;1439&amp;#34; alt=&amp;#34;Screen Shot 2020-12-07 at 11 13 50 AM&amp;#34; src=&amp;#34;https://user-images.githubusercontent.com/some_id/image_name.png&amp;#34;&amp;gt;
+
+Transformed string: This is our inline image from github !https://user-images.githubusercontent.com/some_id/image_name.png|width=100%!
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Combine above two functions together, we get the final transform image link function as follows&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[47]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;transform_image_link&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;transfer_markdown_image_to_wiki_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;transfer_html_image_to_wiki_image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Jira-Labels"&gt;Jira Labels&lt;a class="anchor-link" href="#Jira-Labels"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The labels are pretty straightforward, but here are a few things to remember:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Jira label doesn't support space, so it must be either 1 single word, or separate by underscore &lt;code&gt;_&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;There is no color for Jira labels&lt;/li&gt;
+&lt;li&gt;In the import csv file, each label separated by space within 1 column, or in its own column but with the same label. Probably the first one is easier to implement&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Jira-comments"&gt;Jira comments&lt;a class="anchor-link" href="#Jira-comments"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This part gets really tricky, I spent lots time researching and finally made it work.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;the comment format for importing in Jira is: &lt;code&gt;"date time; commenter; coment content"&lt;/code&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;em&gt;ATTENTION&lt;/em&gt;&lt;/strong&gt;, the commentor must be the user's jira ID, I tried A LOT to make this work, and Jira's documentations haven't update this&lt;/li&gt;
+&lt;li&gt;E.g. "05/05/2010 11:20:30; jira_account_id; This is a comment."&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;the comment time format must be exactly the same as the other time formats (i.e. created_at, etc) so the Jira could parse it correctly &lt;/li&gt;
+&lt;li&gt;the comment is &lt;strong&gt;separate by column&lt;/strong&gt; in csv, which makes the csv fields to be dynamic&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Some more details can be found here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://community.atlassian.com/t5/Jira-questions/CSV-import-comments-author-date/qaq-p/38914#bodyDisplay_88f397d19cc484"&gt;CSV import comments, author, date&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[48]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_comments&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;    
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;comments&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# If there are more than 2 comments, each comment in a separate column&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Get comment details&lt;/span&gt;
+        &lt;span class="n"&gt;comment_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;comments_url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;comment_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;comment_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+            &lt;span class="c1"&gt;# auth=(USERNAME, PAT)&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Comment format from jira:&lt;/span&gt;
+        &lt;span class="c1"&gt;# To preserve the comment author/date use format.&lt;/span&gt;
+        &lt;span class="c1"&gt;# E.g. &amp;quot;05/05/2010 11:20:30;adam; This is a comment.&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;comments&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;comment_&lt;/span&gt;&lt;span class="si"&gt;{i}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+                &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{transform_to_datetime(comment[&amp;#39;updated_at&amp;#39;])}; &amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# comment_date, make sure format is consistent&lt;/span&gt;
+                &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{get_jira_account_id_from_github_login_id(comment[&amp;#39;user&amp;#39;])}; &amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# commentor jira account id&lt;/span&gt;
+                &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;{transform_image_link(comment[&amp;#39;body&amp;#39;])}&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# transform inline image style&lt;/span&gt;
+            &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;comment&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;comment_data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="c1"&gt;# Dynamically update the csv comment fields accordingly&lt;/span&gt;
+        &lt;span class="n"&gt;comment_keys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;k&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;FIELDS&lt;/span&gt;  &lt;span class="c1"&gt;# Generated csv fields&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;field&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;comment_&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;new_comment_key&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;comments&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;new_comment_key&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;comment_keys&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;FIELDS&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;extend&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                    &lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;key&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;new_comment_key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;label&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Comment Body&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;}]&lt;/span&gt;
+                &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;comments&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;comment_0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;  &lt;span class="c1"&gt;# default comment field name&lt;/span&gt;
+    
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;comments&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Some-more-tricks"&gt;Some more tricks&lt;a class="anchor-link" href="#Some-more-tricks"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;h3 id="Markdown-bullet-points"&gt;Markdown bullet points&lt;a class="anchor-link" href="#Markdown-bullet-points"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;When importing content with markdown format, they may not display all the styles properly. Basically you should leave the "Map field value" checkbox unchecked for those fields contain markdown syntax&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://community.atlassian.com/t5/Jira-questions/JIRA-CSV-Importer-Import-Bulleted-List-Into-the-Description/qaq-p/597270"&gt;Details here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Ticket-status-(or-project-column)"&gt;Ticket status (or project column)&lt;a class="anchor-link" href="#Ticket-status-(or-project-column)"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;This is probably the most tricky and difficult one to get, since there is no easy way to retrieve thiis info from GitHub, but its quite easy for Jira.&lt;/p&gt;
+&lt;p&gt;For GitHub tickets, the status from api is simply an indication of the ticket status (i.e. open/close etc). And what we see on the right side card of the ticket is which column the ticket belongs to in the project, and there is no easy way to get it.&lt;/p&gt;
+&lt;p&gt;What I discovered is a way to transverse the ticket's timeline history, and get which column it was moved to (the ticket has a timeline to show all the operations of the ticket, and if there is no operations it still shows the default action when it was created).&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[49]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_timeline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue_number&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;timeline_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;https://api.github.com/repos/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_OWNER}&lt;/span&gt;&lt;span class="s2"&gt;/&lt;/span&gt;&lt;span class="si"&gt;{GITHUB_REPO}&lt;/span&gt;&lt;span class="s2"&gt;/issues/&lt;/span&gt;&lt;span class="si"&gt;{issue_number}&lt;/span&gt;&lt;span class="s2"&gt;/timeline&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;timeline_headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Accept&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;application/vnd.github.mockingbird-preview&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Need to add this header for this api&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;timeline&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;timeline_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="c1"&gt;#         auth=(USERNAME, PAT), &lt;/span&gt;
+        &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;timeline_headers&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;timeline&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Let's again use the ticket 2562 at the beginning of the article as an exmaple&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[50]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;get_timeline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2562&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+&lt;div class="prompt output_prompt"&gt;Out[50]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;[{&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+   &amp;#39;id&amp;#39;: 1273014,
+   &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;},
+  &amp;#39;commit_id&amp;#39;: None,
+  &amp;#39;commit_url&amp;#39;: None,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-22T23:58:04Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;labeled&amp;#39;,
+  &amp;#39;id&amp;#39;: 4142157429,
+  &amp;#39;label&amp;#39;: {&amp;#39;color&amp;#39;: &amp;#39;d876e3&amp;#39;, &amp;#39;name&amp;#39;: &amp;#39;question&amp;#39;},
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOkxhYmVsZWRFdmVudDQxNDIxNTc0Mjk=&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/events/4142157429&amp;#39;},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+   &amp;#39;id&amp;#39;: 1405026,
+   &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;},
+  &amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#39;Firstly, Fastapi does not have any integration with pandas.\n\nTo answer your question though, you could run those operations in a thread pool, and perform the AND once they all complete? I would be surprised if this actually improved performance though&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T03:06:37Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;commented&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-749900439&amp;#39;,
+  &amp;#39;id&amp;#39;: 749900439,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc0OTkwMDQzOQ==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-23T03:06:37Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/749900439&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+   &amp;#39;id&amp;#39;: 1405026,
+   &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;}},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+   &amp;#39;id&amp;#39;: 1273014,
+   &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;},
+  &amp;#39;author_association&amp;#39;: &amp;#39;NONE&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#34;@Mause thanks I know there is no integration with Pandas, but based on the async await nature that FastApi handles I thought I&amp;#39;d ask to see if there are benefits, if so how to approach it.&amp;#34;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T03:19:02Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;commented&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-749904268&amp;#39;,
+  &amp;#39;id&amp;#39;: 749904268,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc0OTkwNDI2OA==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-23T03:19:33Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/749904268&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+   &amp;#39;id&amp;#39;: 1273014,
+   &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;}},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+   &amp;#39;id&amp;#39;: 1405026,
+   &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;},
+  &amp;#39;commit_id&amp;#39;: None,
+  &amp;#39;commit_url&amp;#39;: None,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T03:19:02Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;mentioned&amp;#39;,
+  &amp;#39;id&amp;#39;: 4142510856,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDE0Ok1lbnRpb25lZEV2ZW50NDE0MjUxMDg1Ng==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/events/4142510856&amp;#39;},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+   &amp;#39;id&amp;#39;: 1405026,
+   &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;},
+  &amp;#39;commit_id&amp;#39;: None,
+  &amp;#39;commit_url&amp;#39;: None,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T03:19:02Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;subscribed&amp;#39;,
+  &amp;#39;id&amp;#39;: 4142510860,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDE1OlN1YnNjcmliZWRFdmVudDQxNDI1MTA4NjA=&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/events/4142510860&amp;#39;},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+   &amp;#39;id&amp;#39;: 1405026,
+   &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;},
+  &amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#34;Pandas doesn&amp;#39;t have async support, so your only option here is to use threads, though as I said, it&amp;#39;s not guaranteed that this will give a performance improvement&amp;#34;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-23T04:36:54Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;commented&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-749927183&amp;#39;,
+  &amp;#39;id&amp;#39;: 749927183,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc0OTkyNzE4Mw==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-23T04:36:54Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/749927183&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/1405026?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/Mause&amp;#39;,
+   &amp;#39;id&amp;#39;: 1405026,
+   &amp;#39;login&amp;#39;: &amp;#39;Mause&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjE0MDUwMjY=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/Mause/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/Mause&amp;#39;}},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/47581948?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/hellocoldworld&amp;#39;,
+   &amp;#39;id&amp;#39;: 47581948,
+   &amp;#39;login&amp;#39;: &amp;#39;hellocoldworld&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjQ3NTgxOTQ4&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld&amp;#39;},
+  &amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#34;This is not related in any way to fastapi, but it&amp;#39;s an interesting question. I would encourage you to post this question on a site like StackOverflow&amp;#34;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-24T14:35:05Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;commented&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-750899328&amp;#39;,
+  &amp;#39;id&amp;#39;: 750899328,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc1MDg5OTMyOA==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-24T14:35:05Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/750899328&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars2.githubusercontent.com/u/47581948?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/hellocoldworld&amp;#39;,
+   &amp;#39;id&amp;#39;: 47581948,
+   &amp;#39;login&amp;#39;: &amp;#39;hellocoldworld&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjQ3NTgxOTQ4&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/hellocoldworld&amp;#39;}},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/10202690?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/raphaelauv&amp;#39;,
+   &amp;#39;id&amp;#39;: 10202690,
+   &amp;#39;login&amp;#39;: &amp;#39;raphaelauv&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEwMjAyNjkw&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv&amp;#39;},
+  &amp;#39;author_association&amp;#39;: &amp;#39;CONTRIBUTOR&amp;#39;,
+  &amp;#39;body&amp;#39;: &amp;#39;@scheung38 if you agree with the answers , could you close the issue , thank you&amp;#39;,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;commented&amp;#39;,
+  &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/tiangolo/fastapi/issues/2562#issuecomment-752786189&amp;#39;,
+  &amp;#39;id&amp;#39;: 752786189,
+  &amp;#39;issue_url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/2562&amp;#39;,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDEyOklzc3VlQ29tbWVudDc1Mjc4NjE4OQ==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;updated_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/comments/752786189&amp;#39;,
+  &amp;#39;user&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/10202690?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/raphaelauv&amp;#39;,
+   &amp;#39;id&amp;#39;: 10202690,
+   &amp;#39;login&amp;#39;: &amp;#39;raphaelauv&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEwMjAyNjkw&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/raphaelauv&amp;#39;}},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+   &amp;#39;id&amp;#39;: 1273014,
+   &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;},
+  &amp;#39;commit_id&amp;#39;: None,
+  &amp;#39;commit_url&amp;#39;: None,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;mentioned&amp;#39;,
+  &amp;#39;id&amp;#39;: 4158533607,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDE0Ok1lbnRpb25lZEV2ZW50NDE1ODUzMzYwNw==&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/events/4158533607&amp;#39;},
+ {&amp;#39;actor&amp;#39;: {&amp;#39;avatar_url&amp;#39;: &amp;#39;https://avatars1.githubusercontent.com/u/1273014?v=4&amp;#39;,
+   &amp;#39;events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/events{/privacy}&amp;#39;,
+   &amp;#39;followers_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/followers&amp;#39;,
+   &amp;#39;following_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/following{/other_user}&amp;#39;,
+   &amp;#39;gists_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/gists{/gist_id}&amp;#39;,
+   &amp;#39;gravatar_id&amp;#39;: &amp;#39;&amp;#39;,
+   &amp;#39;html_url&amp;#39;: &amp;#39;https://github.com/scheung38&amp;#39;,
+   &amp;#39;id&amp;#39;: 1273014,
+   &amp;#39;login&amp;#39;: &amp;#39;scheung38&amp;#39;,
+   &amp;#39;node_id&amp;#39;: &amp;#39;MDQ6VXNlcjEyNzMwMTQ=&amp;#39;,
+   &amp;#39;organizations_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/orgs&amp;#39;,
+   &amp;#39;received_events_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/received_events&amp;#39;,
+   &amp;#39;repos_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/repos&amp;#39;,
+   &amp;#39;site_admin&amp;#39;: False,
+   &amp;#39;starred_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/starred{/owner}{/repo}&amp;#39;,
+   &amp;#39;subscriptions_url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38/subscriptions&amp;#39;,
+   &amp;#39;type&amp;#39;: &amp;#39;User&amp;#39;,
+   &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/users/scheung38&amp;#39;},
+  &amp;#39;commit_id&amp;#39;: None,
+  &amp;#39;commit_url&amp;#39;: None,
+  &amp;#39;created_at&amp;#39;: &amp;#39;2020-12-30T23:14:26Z&amp;#39;,
+  &amp;#39;event&amp;#39;: &amp;#39;subscribed&amp;#39;,
+  &amp;#39;id&amp;#39;: 4158533609,
+  &amp;#39;node_id&amp;#39;: &amp;#39;MDE1OlN1YnNjcmliZWRFdmVudDQxNTg1MzM2MDk=&amp;#39;,
+  &amp;#39;performed_via_github_app&amp;#39;: None,
+  &amp;#39;url&amp;#39;: &amp;#39;https://api.github.com/repos/tiangolo/fastapi/issues/events/4158533609&amp;#39;}]&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The next step is to get all the event, and see if there is a move or create action from a project. 
+All the events urls are given in the payload, and we are looking for keywords &lt;code&gt;moved_columns_in_project&lt;/code&gt; and &lt;code&gt;added_to_project&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We look through the returned result in the reverse order, from the latest to the earliest.&lt;/p&gt;
+&lt;p&gt;If we still didn't find anything that means there is no operation to the ticket, it was still in the default column, so we can just use the first timeline.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[51]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_event_details&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;event_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;event_headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Accept&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;application/vnd.github.starfox-preview+json&amp;quot;&lt;/span&gt;  &lt;span class="c1"&gt;# Need to add this header for this api&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;event_detail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;event_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+&lt;span class="c1"&gt;#         auth=(USERNAME, PAT), &lt;/span&gt;
+        &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;event_headers&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;event_detail&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[52]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;transform_issue_status&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue_number&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;issue_status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# First get timeline&lt;/span&gt;
+    &lt;span class="n"&gt;timeline&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_timeline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue_number&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Then we transverse the list reversely to get the latest update&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;event_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;event&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;moved_columns_in_project&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;event_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;added_to_project&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;issue_status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_event_details&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_card&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;column_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;  &lt;span class="c1"&gt;# Quit once we found the latest status&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;issue_status&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="c1"&gt;# Status not found, default to the column when the ticket was created&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;issue_status&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_event_details&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_card&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;column_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;issue_status&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Well we can't test here, but this should work most of the time.&lt;/p&gt;
+&lt;p&gt;However, this is not a super robust solution due to the time constraint. Maybe there is a better way to do this.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="Get-issues-from-a-project"&gt;Get issues from a project&lt;a class="anchor-link" href="#Get-issues-from-a-project"&gt;&amp;#182;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Similarly, when exporting all the issues for a particular project, we can use the same approach.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[53]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_issues_by_project&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project_id&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;project_issues&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;issue&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;get_all_issues&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;timeline&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_timeline&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;event&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;event_type&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;event&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;event_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;moved_columns_in_project&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;event_type&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;added_to_project&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;event_detail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_event_details&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;event&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="n"&gt;issue_project_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event_detail&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_card&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;issue_project_id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project_id&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="n"&gt;project_issues&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;--&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;event_detail&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_card&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;column_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+                &lt;span class="k"&gt;break&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="c1"&gt;# Status not found, default to the column when the ticket was created&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;timeline&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;url&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;event_detail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_event_details&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;timeline&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="n"&gt;issue_project_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;event_detail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_card&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;{})&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_id&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;issue_project_id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project_id&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                    &lt;span class="n"&gt;project_issues&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;issue&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;--&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;event_detail&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;project_card&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;column_name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;number&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;project_issues&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;project_issues&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;However, above approach may not be very accurate when one issue is assigned in more than one project.&lt;/p&gt;
+&lt;p&gt;Here I'm only just showing you a way of making this happen.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Reference"&gt;Reference&lt;a class="anchor-link" href="#Reference"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token"&gt;How to generate GitHub Personal Access Token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://stackoverflow.com/questions/9755257/list-all-issues-from-an-organizations-private-repo-using-github-api-v3"&gt;List all issues from an organization's private repo using github api v3&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/isaacs/github/issues/660"&gt;Search by label using logical OR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://confluence.atlassian.com/adminjiraserver/importing-data-from-github-938847543.html"&gt;Importing data from Github (Jira)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://confluence.atlassian.com/adminjiraserver/importing-data-from-csv-938847533.html"&gt;Importing data from CSV (Jira)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/"&gt;Jira deprecation notification&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://support.atlassian.com/jira-software-cloud/docs/convert-usernames-to-user-account-i-ds/"&gt;Convert usernames to user account IDs (Jira)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://confluence.atlassian.com/cloud/api-tokens-938839638.html"&gt;Create Jira API token&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-users/#api-group-users"&gt;Jira API documentation for users&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://community.atlassian.com/t5/Jira-questions/CSV-import-comments-author-date/qaq-p/38914#bodyDisplay_88f397d19cc484"&gt;CSV import comments, author, date&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This is the end of the tutorial, thanks for reading.&lt;/p&gt;
+&lt;p&gt;Hopefully this article can hep you save some time :)&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+ 
+
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</content><category term="python"></category><category term="GitHub"></category><category term="Jira"></category><category term="migration"></category></entry><entry><title>How to setup Github Blog via Pelican</title><link href="/how-to-setup-github-blog-via-pelican.html" rel="alternate"></link><published>2020-04-12T00:00:00-06:00</published><updated>2020-04-12T00:00:00-06:00</updated><author><name>Carson Zhang</name></author><id>tag:None,2020-04-12:/how-to-setup-github-blog-via-pelican.html</id><summary type="html">&lt;p&gt;There are many ways to setup a Github blog, but since I love Python I think it makes sense to use Pelican, which is a Static Site Generator, Powered by Python. &lt;/p&gt;
 &lt;h2&gt;Set up environment&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;Create a blog directory for all blog content and styles: &lt;code&gt;mkdir &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
@@ -117,7 +2854,7 @@ IGNORE_FILES = [&amp;#39;.ipynb_checkpoints&amp;#39;]
 &lt;li&gt;Go to blog directory: &lt;code&gt;cd &amp;lt;blogname&amp;gt;&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Run &lt;code&gt;pelican content -s publishconf.py&lt;/code&gt; to create html files&lt;/li&gt;
 &lt;li&gt;Go to the output directory &lt;code&gt;cd output&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;RUn &lt;code&gt;python -m pelican.server&lt;/code&gt; to spin up the server and you can see it in your browser at &lt;code&gt;http://localhost:8000/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;python -m pelican.server&lt;/code&gt; to spin up the server and you can see it in your browser at &lt;code&gt;http://localhost:8000/&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Publish posts&lt;/h2&gt;
 &lt;ol&gt;
