@@ -1053,7 +1053,7 @@ h6:hover .anchor-link {
 <p>Most of time you have to write a script to migrate them, otherwise manually moving hundreds or even thousands of tickets could take a long time!</p>
 <p>However, the GitHub API and Jira developer docs are not really clear. By the time of this article, GitHub just updated their API and at the top of pretty much all of their documentations say that the content may not be up-to-date, whereas Jira just updated their api to only take in Jira's internal account id instead of username (and email) when targeting any users due to the GDPR compliance.</p>
 <p>Therefore, to migrate from GitHub to Jira became try and error and research, and I couldn't find some really good articles/tutorials to do so.</p>
-<p>Thus I come up with this article (tutorial) to demonstrate how to implement such script.</p>
+<p>Thus I come up with this tutorial to demonstrate how to implement such script.</p>
 
 </div>
 </div>
@@ -1083,7 +1083,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># In this article I&#39;ll use the FastAPI repo as an example</span>
@@ -1114,7 +1114,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import some libs for use in the script</span>
@@ -1133,7 +1133,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_single_issue</span><span class="p">(</span><span class="n">issue_number</span><span class="p">):</span>
@@ -1263,7 +1263,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_all_issues</span><span class="p">(</span><span class="n">pagination</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -1338,7 +1338,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_all_labels</span><span class="p">():</span>
@@ -1359,7 +1359,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Lets see the details for 1 label</span>
@@ -1397,7 +1397,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Lets see all the label names</span>
@@ -1440,7 +1440,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_all_issues_by_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">pagination</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -1490,7 +1490,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># As mentioned above the filter by label in GitHub is AND, so if </span>
@@ -1537,7 +1537,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Since the comment url is in the issue&#39;s data, we can just use it to fetch the comments for the issue</span>
@@ -1765,7 +1765,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># We could initialize Jira mapping as follows</span>
@@ -1810,7 +1810,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Suppose we have a map of github login name and user email like follows</span>
@@ -1875,7 +1875,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Using above function, we can maually create a map of GitHub login ID and </span>
@@ -1922,7 +1922,7 @@ h6:hover .anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">transfer_markdown_image_to_wiki_image</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
@@ -1988,7 +1988,7 @@ Transformed string: This is our inline image from github !https://user-images.gi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">transfer_html_image_to_wiki_image</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
@@ -2057,7 +2057,7 @@ Transformed string: This is our inline image from github !https://user-images.gi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">transform_image_link</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
@@ -2092,10 +2092,12 @@ Transformed string: This is our inline image from github !https://user-images.gi
 <h2 id="Jira-comments">Jira comments<a class="anchor-link" href="#Jira-comments">&#182;</a></h2><p>This part gets really tricky, I spent lots time researching and finally made it work.</p>
 <ol>
 <li>the comment format for importing in Jira is: <code>"date time; commenter; coment content"</code><ul>
-<li><strong><em>ATTENTION</em></strong>, the commentor must be the user's jira ID, I tried A LOT to make this work, and Jira's documentations haven't update this</li>
+<li><strong>ATTENTION</strong>, the commentor must be the user's jira ID, I tried A LOT to make this work, and Jira's documentations haven't update this</li>
 <li>E.g. "05/05/2010 11:20:30; jira_account_id; This is a comment."</li>
 </ul>
 </li>
+</ol>
+<ol>
 <li>the comment time format must be exactly the same as the other time formats (i.e. created_at, etc) so the Jira could parse it correctly </li>
 <li>the comment is <strong>separate by column</strong> in csv, which makes the csv fields to be dynamic</li>
 </ol>
@@ -2109,7 +2111,7 @@ Transformed string: This is our inline image from github !https://user-images.gi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_comments</span><span class="p">(</span><span class="n">issue</span><span class="p">):</span>    
@@ -2183,7 +2185,7 @@ Transformed string: This is our inline image from github !https://user-images.gi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_timeline</span><span class="p">(</span><span class="n">issue_number</span><span class="p">):</span>
@@ -2216,7 +2218,7 @@ Transformed string: This is our inline image from github !https://user-images.gi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_timeline</span><span class="p">(</span><span class="mi">2562</span><span class="p">)</span>
@@ -2232,7 +2234,7 @@ Transformed string: This is our inline image from github !https://user-images.gi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[50]:</div>
+<div class="prompt output_prompt">Out[19]:</div>
 
 
 
@@ -2626,7 +2628,7 @@ All the events urls are given in the payload, and we are looking for keywords <c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_event_details</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
@@ -2650,7 +2652,7 @@ All the events urls are given in the payload, and we are looking for keywords <c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">transform_issue_status</span><span class="p">(</span><span class="n">issue_number</span><span class="p">):</span>
@@ -2701,7 +2703,7 @@ All the events urls are given in the payload, and we are looking for keywords <c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_issues_by_project</span><span class="p">(</span><span class="n">project_id</span><span class="p">):</span>
