@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Updating an old site to Python 3.*, Django 2.*, Wagtail 2.*</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Full Atom Feed" />
+  <link href="/feeds/tutorial.atom.xml" type="application/atom+xml" rel="alternate" title="Carson's Tech Hut Categories Atom Feed" />
+
+  <script>
+  /* Javascript code to toggle between adding and removing the
+  "responsive" class to nav when the user clicks on the icon */
+  function myFunction() {
+    var x = document.getElementById("nav-bar");
+    if (x.className === "nav") {
+      x.className += " responsive";
+    } else {
+      x.className = "nav";
+    }
+  }
+  </script>
+
+</head>
+
+<body>
+  <div class="navigation pure-menu pure-menu-horizontal">
+    <div class="nav", id="nav-bar">
+      <a href="/" class="page-container pure-menu-heading  pure-menu-link nav">Carson's Tech Hut</a>
+      <ul class="pure-menu-list">
+          <li class="pure-menu-item"><a href="../archives.html" class="pure-menu-link">All posts</a></li>
+          <li class="pure-menu-item"><a href="../categories.html" class="pure-menu-link">Categories</a></li>
+          <li class="pure-menu-item"><a href="../tags.html" class="pure-menu-link">Tags</a></li>
+      </ul>
+      <a href="javascript:void(0);" class="icon pure-menu-link" onclick="myFunction()">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+  </div>
+
+<div class="page-container">
+    <div class="entry-content">
+      <div class="post-meta pure-u">
+          <div class="pure-u">
+              <img src="../theme/images/authors/Logo.png" class="post-avatar" alt="Go to the profile of Carson Zhang">
+          </div>
+          <div class="pure-u meta-data">
+              <a href="/author/carson-zhang.html" class="category">Carson Zhang</a><br />
+              
+            Senior Software Developer
+        <br />
+              <abbr title="2019-04-23T00:00:00-06:00">Tue 23 April 2019</abbr>
+              • 14 min read
+          </div>
+      </div>
+    </div>
+
+    <div class="article-header-container">
+        <div class="background-image-container">
+
+            <div class="background-image-small">
+                <div class="title-container">
+                    <h1>Updating an old site to Python 3.*, Django 2.*, Wagtail 2.*</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="entry-content">
+        <!--
+        <div align="right">
+          Author:<br>
+              <a href="/author/carson-zhang.html">Carson Zhang</a><br>
+        </div>
+        -->
+
+        <h2>0. Useful Links</h2>
+<ul>
+<li><a href="https://docs.djangoproject.com/en/2.0/releases/2.0/">Django 2.0 release notes | Django documentation | Django</a></li>
+<li><a href="http:\docs.wagtail.io\en\v2.0\releases\upgrading.html">Wagtail 2.0 realease notes</a></li>
+<li><a href="https://wagtail.io/blog/upgrading-to-wagtail-2/">Upgrading to Wagtail 2.0 | Wagtail CMS</a></li>
+<li><a href="https://eldarion.com/blog/2017/12/26/10-tips-upgrading-django-20/">10 Tips for Upgrading to Django 2.0 — Eldarion Blog</a></li>
+<li><a href="https://nezhar.com/blog/upgrade-a-django-based-application-from-1-11-to-2-0/">Upgrade a Django based application from 1.11 to 2.0 | nezhar.com</a></li>
+<li><a href="https://docs.python.org/3/howto/pyporting.html">Porting Python 2 Code to Python 3 — Python 3.7.3 documentation</a></li>
+<li><a href="https://docs.python.org/2/library/2to3.html">25.4. 2to3 - Automated Python 2 to 3 code translation — Python 2.7.16 documentation</a></li>
+<li><a href="https://portingguide.readthedocs.io/en/latest/index.html">The Conservative Python 3 Porting Guide — Conservative Python 3 Porting Guide 1.0 documentation</a> [<strong>highly recommended</strong>]</li>
+</ul>
+<h2>1. Preparation</h2>
+<ul>
+<li>
+<p>Check if all the packages are upgradable. </p>
+<ul>
+<li>It is essentially important that you at least check all the major packages that are used as core packages to make sure they are upgradable. If not, you may have to choose not to upgrade the web at all, or find some other solutions</li>
+<li>Two very useful tools:<ul>
+<li><a href="https://pypi.org/project/updatable/"><strong>updatable</strong></a> – returns all available updates for the packages installed in the current environment (virtualenv or global)</li>
+<li><a href="https://pypi.org/project/pipdeptree/"><strong>pipdeptree</strong></a> – returns a tree of dependencies, which will help to remove installed packages that aren’t required anymore.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Check the version support table for python, django, and wagtail</p>
+<ul>
+<li>support relation: wagtail 2.0 --&gt; django 1.11, 2.0 --&gt; Python 3.4, 3.5, 3.6</li>
+</ul>
+</li>
+<li>
+<p><strong>Gochas</strong>:</p>
+<ul>
+<li>Any site using the <em><code>wagtail elasticsearch 1.x</code></em>. You’ll have to upgrade it before you make the switch.</li>
+<li>Any site using <em><code>wagtail API 1.x</code></em>. It’s also been removed and if upgrading isn’t possible you can use <em><code>wagtailapi_legacy</code></em>. </li>
+</ul>
+</li>
+<li>
+<p><strong>Warnings</strong>:</p>
+<ul>
+<li>Create a new git branch for upgrading in case anything went wrong </li>
+<li>Create a another db for the upgrade if possible, in case anything went wrong</li>
+</ul>
+</li>
+</ul>
+<h2>2. Upgrade Python</h2>
+<ul>
+<li>
+<p>The biggest trick is that you do not work in the current virtual environment (assume that you are using a virtual environment, and please do so if not). You should start a new environment with python 3 preinstalled so that you don't have to manually uninstall and install different versions of python.</p>
+<ul>
+<li>For example: <em><code>mkvirtualenv env_name --python=python3</code></em></li>
+</ul>
+</li>
+<li>
+<p>After switch to Python 3, we have to deal with the changes:</p>
+<ul>
+<li><em><code>print</code></em> has become a function in python 3</li>
+<li><em><code>from six import u as unicode  # Fix Python 2.x.</code></em> fixes all the issues with <em><code>unicode</code></em></li>
+</ul>
+</li>
+<li>
+<p>Run the website and fix all the errors\warnings, and then go to the next step</p>
+<ul>
+<li>Double check that “Conservative python 3 porting guide” for any errors showing up</li>
+</ul>
+</li>
+</ul>
+<h2>3. Git Branching</h2>
+<ul>
+<li>In order for the production server to be upgraded successfully, you should pay extra attention to how you make the branches as you have to manually change some code and how the migrations may affect your database</li>
+<li>I suggest using the two-step process and make three branches:<ul>
+<li>Step 1: the python 3 branch<ul>
+<li>You should commit any change for making the project run under python 3 in this branch</li>
+<li>ATTENTATION: after your project is upgraded and running with python 3, you should do a <code>django-admin makemigrations</code> and <code>django-admin migrate</code> to make sure your database is up-to-date</li>
+</ul>
+</li>
+<li>Step 2: wagtail and django 2 branch<ul>
+<li>Commit any changes for upgrading wagtail and django to this branch</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>So the process for reproducing the upgrade on the production server will be:<ul>
+<li>Step 1:<ul>
+<li>make virtual environment with python 3</li>
+<li><code>git checkout python_upgrade_3</code></li>
+<li><code>pip install -r dev.txt</code></li>
+<li><code>django-admin migrate</code> (you must migrate first for the project to run)</li>
+<li><code>django-admin runserver</code> should work</li>
+</ul>
+</li>
+<li>Step 2:<ul>
+<li><code>git checkout wagtail_django_upgrade</code></li>
+<li>*<code>pip freeze | xargs pip uninstall -y</code> to delete all the packages first</li>
+<li>*<code>pip install -r dev.txt</code> to re-install all the packages (the quickest way to get all the upgraded packages working)</li>
+<li><code>add2virtualenv thirdparty_apps</code> (if any packages are not maintained and you have to upgrade them locally)</li>
+<li><code>django-admin migrate</code></li>
+<li><code>django-admin runserver</code> should work</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>4. Before Django and wagtail upgrading</h2>
+<ul>
+<li>
+<p>You should upgrade django one version at a time and fix everything during upgrading until you are at 1.11. Chances are that the upgrade is much smoother to Django 2.0 if the project was built in 1.11.</p>
+<ul>
+<li>It is possible due to package dependencies, you cannot upgrade to 1.11, that's ok, but try to upgrade to the latest django version before 2.0</li>
+<li>Upgrade wagtail accordingly, to the version 1.13 as close as possible </li>
+<li>These errors will be written in red text if any are found.</li>
+<li>Run the application locally, and fix any deprecation warnings that it alerts you with. </li>
+</ul>
+</li>
+<li>
+<p>After you are at Django 1.11 (or at least very close to this version) and before continuing, make sure the site doesn't have any missing migrations and you have made a backup of the database (just incase shit hits the fan).</p>
+<ul>
+<li><em><code>django-admin makemigrations</code></em> to check if there is any migration changes</li>
+<li><em><code>django-admin migrate</code></em> to actually make the migration happens at the database level</li>
+</ul>
+</li>
+<li>
+<p>Squash every apps migrations and make sure to use the last migration number.</p>
+<ul>
+<li><strong>NOTE</strong> that you have to do this under <strong>Python 3</strong> environment otherwise nightmare will come to you after you are at Django 2.0</li>
+<li>For example: <em><code>django-admin squashmigrations pages 0032</code></em></li>
+</ul>
+</li>
+<li>
+<p>Delete all migration files except for the squashed ones.</p>
+</li>
+</ul>
+<h2>5. Start the upgrade</h2>
+<ul>
+<li>
+<p>Before doing the actual upgrading, double check that you are at (or at least close to) Django 1.11 and wagtail 1.13 as we mentioned before</p>
+</li>
+<li>
+<p>Start upgrading the main ones:</p>
+<ul>
+<li>Upgrade django to 2.0. <em><code>pip3 install django==2.*</code></em></li>
+<li>Upgrade wagtail to 2.0. <em><code>pip3 install wagtail==2.*</code></em></li>
+<li>Upgrade DRF to 3.7. <em><code>pip3 install djangorestframework==3.7.7</code></em></li>
+</ul>
+</li>
+<li>
+<p>Next, run the wagtail module update script. This will rename any old imports to the new ones.</p>
+<ul>
+<li><em><code>wagtail updatemodulepaths --list</code></em> Will list the files getting changed.</li>
+<li><em><code>wagtail updatemodulepaths --diff</code></em> Will show the diffs.</li>
+<li><em><code>wagtail updatemodulepaths</code></em> Will make the all changes.</li>
+</ul>
+</li>
+<li>
+<p>If this doesn't work and gives you a unicode error. Wait a bit a run it again. I noticed docker takes some time to switch to django 2.</p>
+</li>
+</ul>
+<h2>6. Fix Django related issues</h2>
+<h4>Fix up the settings.py</h4>
+<ul>
+<li>Update the <em><code>MIDDLEWARE_CLASSES</code></em> name to <em><code>MIDDLEWARE</code></em> in all the settings</li>
+</ul>
+<h4>Fix up urls</h4>
+<ul>
+<li>
+<p>Django 2 made some changes to how urls and namespacing works. Known quick changes are:</p>
+<ul>
+<li><em><code>url(r'^clientadmin\', include(admin.site.urls)),</code></em> to <em><code>url(r'^clientadmin\', admin.site.urls),</code></em></li>
+</ul>
+</li>
+<li>
+<p>Also make sure to add <em><code>app_name</code></em> to included urls that are namespaced. So if you see <em><code>url(r'^forms\', include(snippetforms_urls, namespace="forms")),</code></em> make sure <em><code>apps\cms\snippetforms\urls.py</code></em> is updated to have <em><code>app_name = 'forms'</code></em></p>
+</li>
+</ul>
+<h4>Fix up models</h4>
+<ul>
+<li>Django 2 or more specifically python3 doesn't have the <code>unicode</code> mess, instead it only has the <code>str</code> type which saves a lot headache. In the django models, change all the <em><code>__unicode__</code></em> to <em><code>__str__</code></em> and it'll correct all the display issue</li>
+</ul>
+<h4>Switching up assignment tags</h4>
+<ul>
+<li>Django 2 removed <em><code>assignment_tag</code></em> and is used in most of our template tags (blog, menu &amp; pages). Do a quick find all and replace it to <em><code>simple_tag</code></em>.</li>
+</ul>
+<h4>Fix up custom middlewares</h4>
+<ul>
+<li>Django 2 does not call <em><code>process_request</code></em> and <em><code>process_response</code></em> by default. This functionally has been replaced with <strong><code>call</code></strong> and the <strong><code>get_response</code></strong> function that is passed to init.<ul>
+<li>A great solution is <a href="https://stackoverflow.com/questions/48879661/confused-by-middleware-execution-process-django#answer-48880124"><strong>HERE</strong></a></li>
+<li>Above solution should work, if not, check the accepted answer at <a href="https://stackoverflow.com/questions/44997388/django-why-is-this-custom-middleware-not-working#45020502"><strong>HERE</strong></a></li>
+</ul>
+</li>
+</ul>
+<h4>Fix ".rel" related error</h4>
+<ul>
+<li>If you encounter an error similar to <code>'ManyToManyField' object has no attribute 'rel'</code>, it is possible due to the fact that <code>db_field.rel</code> is deprecated, just change it to <code>db_field.remote_field</code><ul>
+<li>More details about this could be find <a href="https://code.djangoproject.com/ticket/24317"><strong>HERE</strong></a></li>
+</ul>
+</li>
+</ul>
+<h4>Third party packages</h4>
+<ul>
+<li>For those third packages that has compatibility issues:<ol>
+<li>check if github has the latest version since Pypi can be out-dated sometimes</li>
+<li>checkout github pull request as sometime people have already fixed it</li>
+<li>If above two steps won't work, git clone the whole package and save into the <strong>thirdparty_apps</strong> folder inside the project and make the change locally. <strong>NOTE</strong> that by doing this it will be really tough to do further upgrade in the future.</li>
+</ol>
+</li>
+</ul>
+    </div>
+
+    <footer>
+        <div class="tags">
+            <a href="/tag/python.html">Python</a>
+            <a href="/tag/django.html">Django</a>
+            <a href="/tag/wagtail.html">Wagtail</a>
+        </div>
+        <div class="pure-g post-footer">
+            <div class="pure-g">
+                <div class="pure-g poster-info">
+                    <div class="pure-u">
+                        <a href="/author/carson-zhang.html"><img src="../theme/images/authors/Logo.png" alt=""></a>
+                    </div>
+                    <div class="pure-u">
+                        <h3 class="author-name"><a href="/author/carson-zhang.html">Carson Zhang</a></h3>
+                        <p class="author-description">
+                          
+            I'm a senior software developer, passionated with artificial intellgence and
+            web development.
+        
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--
+            -->
+
+        </div>
+
+
+    </footer>
+
+
+</div>
+
+
+  <footer class="index-footer">
+    <div class="footer-wide">
+      <p><a href="">Carson's Tech Hut</a>&copy; Carson Zhang 2020</p>
+    </div>
+    <div class="footer-narrow">
+      <p><a href="">Carson's Tech Hut</a><br>
+      &copy; Carson Zhang 2020</p>
+    </div>
+  </footer>
+
+
+  <link rel="stylesheet" href="../theme/css/pure-min.css" />
+  <link rel="stylesheet" href="../theme/css/grids-responsive-min.css" />
+  <link rel="stylesheet" href="../theme/fontawesome-free-5.13.0-web/css/all.min.css" />
+  <link rel="stylesheet" href="/theme/css/main.css" />
+</body>
+
+
+</html>
