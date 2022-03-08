@@ -233,7 +233,7 @@
 &lt;li&gt;Navigate to the folder where the virtualenv is installed (normally under /usr/local/bin)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;nano ~/.bashrc&lt;/code&gt; (&lt;code&gt;nano ~/.zshrc&lt;/code&gt; on Mac)&lt;/li&gt;
 &lt;li&gt;Add the following line to the folder:&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;. /usr/local/bin/virtualenvwrapper.sh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;source /usr/local/bin/virtualenvwrapper.sh&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;If the virtualenvwrapper is installed in another directory, add the path of the directory instead of the &lt;code&gt;/usr/local/bin/&lt;/code&gt;&lt;ul&gt;
@@ -241,7 +241,10 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;CTRL + X&lt;/code&gt; to exit, and &lt;code&gt;Y&lt;/code&gt; to save, and hit &lt;code&gt;Enter&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;After its being added, use &lt;code&gt;source ~/.bashrc&lt;/code&gt; (&lt;code&gt;source ~/.zshrc&lt;/code&gt; on Mac) to check if it is working. It should print some files on the screen with no errors&lt;/li&gt;
+&lt;li&gt;After its being added, use &lt;code&gt;source ~/.bashrc&lt;/code&gt; (&lt;code&gt;source ~/.zshrc&lt;/code&gt; on Mac) to check if it is working. It should print some files on the screen with no errors&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;NOTE&lt;/strong&gt; if there is a path issue for virtualenv or python path (i.e. there are multiple versions of Python in system), use &lt;code&gt;which python&lt;/code&gt; to find the path, and then add &lt;code&gt;VIRTUALENVWRAPPER_PYTHON=&amp;lt;python path&amp;gt;&lt;/code&gt; to the &lt;code&gt;bashrc/zshrc&lt;/code&gt; &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2&gt;Setup virtual environment&lt;/h2&gt;
